@@ -1,8 +1,0 @@
-﻿  moc MatrixMemory.h
-  moc gameField.h
-  MatrixMemory.cpp
-  gameField.cpp
-  main.cpp
-  moc_MatrixMemory.cpp
-  moc_gameField.cpp
-  Matrix-Memory.vcxproj -> C:\Users\ag629\source\repos\Matrix-Memory\Matrix-Memory\x64\Debug\Matrix-Memory.exe
