@@ -1,9 +1,9 @@
 #pragma once
-#include <QWidget>
-#include <QPushButton>
-#include <QLabel>
-#include <QVBoxLayout>
 
+#include <QWidget>
+#include <QLabel>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 class MainMenu : public QWidget
 {
@@ -12,13 +12,12 @@ public:
 	explicit MainMenu(QWidget* parent = nullptr) ;
 	~MainMenu() = default;
 private:
-	QLabel* titleLbl;
-	QPushButton* playBtn;
-	QLabel* scoreLbl;
-	QLabel* tileLbl;
-	QLabel* recordLbl;
-	QLabel* maxTileLbl;
-	QPushButton* infoBtn;
-	QPushButton* ladderBtn;
+	QLabel* titleLabel;
+	QPushButton* playButton;
+	QLabel* scoreLabel;
+	QLabel* tileLabel;
+	QLabel* recordLabel;
+	QLabel* maxTileLabel;
+	QPushButton* infoButton;
+	QPushButton* ladderButton;
 };
-

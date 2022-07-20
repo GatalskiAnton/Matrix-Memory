@@ -1,10 +1,51 @@
-QPushButton#evilButton {
-     background-color: red;
-     border-style: outset;
-     border-width: 2px;
-     border-radius: 10px;
-     border-color: beige;
-     font: bold 14px;
-     min-width: 10em;
-     padding: 6px;
- }
+* {
+	background-color: rgb(3,38,66);
+}
+#titleLabel {
+	color: rgb(255,255,253);
+}
+#playButton {
+	width:  200px;
+	height: 200px;
+	border: 1.5px solid  rgb(255,255,253);
+	border-radius: 100px;
+	background-color:rgb(46,202,95);
+	color: rgb(255,255,253);
+	font-size: 50px;
+}
+#playButton:pressed {
+	font-size: 20px;
+} 
+#scoreLabel {
+	color:rgb(255,255,253);
+	font-size: 25px;
+}
+#tileLabel {
+	color:rgb(255,255,253);
+	font-size: 25px;
+}
+#recordLabel {
+	color:rgb(255,255,253);
+	font-size: 25px;
+}
+#maxTileLabel {
+	color:rgb(255,255,253);
+	font-size: 25px;
+}
+#infoButton {
+	height:50px;
+	width: 50px;
+	border: 1.5px solid  rgb(255,255,253);
+	border-radius: 25px;
+	color:rgb(255,255,253);
+	font-size: 40px;
+}
+#ladderButton {
+	height:50px;
+	width: 50px;
+	border: 1.5px solid  rgb(255,255,253);
+	border-radius: 25px;
+	background: #00ff00 url(ladderIcon.png);
+	color:rgb(255,255,253);
+	font-size: 40px;
+}
