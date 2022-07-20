@@ -89,11 +89,15 @@
     <QtUic Include="MatrixMemory.ui" />
     <QtMoc Include="MatrixMemory.h" />
     <ClCompile Include="gameField.cpp" />
+    <ClCompile Include="mainMenu.cpp" />
     <ClCompile Include="MatrixMemory.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="gameField.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="mainMenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
