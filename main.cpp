@@ -1,12 +1,14 @@
 #include "MatrixMemory.h"
 #include <QtWidgets/QApplication>
 #include "gameField.h"
+#include "mainMenu.h"
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MatrixMemory w;
-    GameField gf;
-    gf.show();
-    w.show();
+    MainMenu startMenu;
+    startMenu.resize(750, 900);
+    startMenu.show();
+    
     return a.exec();
 }
