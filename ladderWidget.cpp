@@ -7,9 +7,15 @@ LadderWidget::LadderWidget(QWidget* parent)
 	QFont Boomboom(family);
 	this->setFont(Boomboom);
 
-	backButton = new QPushButton("Back",this);
+	this->setWindowFlags(Qt::FramelessWindowHint);
+
+	titleLabel = new QLabel("Leaderbord", this);
+	ladderList = new QListWidget(this);
+	backButton = new QPushButton("Back", this);
 	exitButton = new QPushButton(this);
-	
+
+	titleLabel->setObjectName("titleLabel");
+	ladderList->setObjectName("ladderList");
 	backButton->setObjectName("backButton");
 	exitButton->setObjectName("exitButton");
 
@@ -17,36 +23,50 @@ LadderWidget::LadderWidget(QWidget* parent)
 	QIcon buttonIcon(pixmap);
 	exitButton->setIcon(buttonIcon);
 	exitButton->setIconSize(QSize(25, 25));
-	exitButton->setObjectName("exitButton");
-
-	titleLabel = new QLabel("Leaderbord", this);
-	titleLabel->setObjectName("titleLabel");
 
 	QVBoxLayout* verticalLayout = new QVBoxLayout(this);
 	QHBoxLayout* horizontaLayout = new QHBoxLayout(this);
-
-	QFile file("styles/leaderbordStyle.qss");
-	file.open(QFile::ReadOnly);
-	setStyleSheet(file.readAll());
 
 	verticalLayout->setSpacing(0);
 	horizontaLayout->addWidget(backButton, 0, Qt::AlignTop | Qt::AlignLeft);
 	horizontaLayout->addWidget(titleLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
 	horizontaLayout->addWidget(exitButton, 0, Qt::AlignTop | Qt::AlignRight);
 	verticalLayout->addLayout(horizontaLayout);
-
+	verticalLayout->addWidget(ladderList, 0);
 	setLayout(verticalLayout);
 
-	connect(backButton, SIGNAL(clicked()), SLOT(onClickedBackButton()));
 	connect(backButton, SIGNAL(pressed()), SLOT(pressedOnBackButton()));
 	connect(backButton, SIGNAL(released()), SLOT(releasedOnBackButton()));
+	connect(backButton, SIGNAL(clicked()), SLOT(onClickedBackButton()));
+	connect(exitButton, SIGNAL(pressed()), SLOT(pressedOnExitButton()));
+	connect(exitButton, SIGNAL(released()), SLOT(releasedOnExitButton()));
 	connect(exitButton, SIGNAL(clicked()), SLOT(onClickedExitButton()));
+
+	QFile file("styles/leaderbordStyle.qss");
+	file.open(QFile::ReadOnly);
+	setStyleSheet(file.readAll());
 }
 
 void LadderWidget::onClickedBackButton()
 {
 	this->close();
 	emit showMainMenu();
+}
+
+void LadderWidget::pressedOnExitButton()
+{
+	QPixmap pixmap("exitButtonIconPressed.jpg");
+	QIcon buttonIcon(pixmap);
+	exitButton->setIcon(buttonIcon);
+	exitButton->setIconSize(QSize(25, 25));
+}
+
+void LadderWidget::releasedOnExitButton()
+{
+	QPixmap pixmap("exitButtonIcon.jpg");
+	QIcon buttonIcon(pixmap);
+	exitButton->setIcon(buttonIcon);
+	exitButton->setIconSize(QSize(25, 25));
 }
 
 void LadderWidget::pressedOnBackButton()
