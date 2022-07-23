@@ -58,7 +58,7 @@ void LadderWidget::pressedOnExitButton()
 	QPixmap pixmap("exitButtonIconPressed.jpg");
 	QIcon buttonIcon(pixmap);
 	exitButton->setIcon(buttonIcon);
-	exitButton->setIconSize(QSize(25, 25));
+	exitButton->setIconSize(QSize(20, 20));
 }
 
 void LadderWidget::releasedOnExitButton()

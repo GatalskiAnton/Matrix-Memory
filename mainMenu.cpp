@@ -2,6 +2,8 @@
 
 MainMenu::MainMenu(QWidget*)
 {
+
+
 	int id = QFontDatabase::addApplicationFont("fonts/Boomboom.otf");
 	QString family = QFontDatabase::applicationFontFamilies(id).at(0);
 	QFont Boomboom(family);
@@ -18,6 +20,8 @@ MainMenu::MainMenu(QWidget*)
 	exitButton = new QPushButton(this);
 	ladderButton = new QPushButton(this);
 	ladderWidget = new LadderWidget(this);
+	exitWidget = new ConfirmationExitWidget(this);
+	exitWidget->hide();
 
 	titleLabel->setObjectName("titleLabel");
 	playButton->setObjectName("playButton");
@@ -71,6 +75,8 @@ MainMenu::MainMenu(QWidget*)
 	connect(ladderButton, SIGNAL(released()), SLOT(releasedOnLadderButton()));
 	connect(ladderButton, SIGNAL(clicked()), SLOT(onClickedLadderButton()));
 	connect(ladderWidget, &LadderWidget::showMainMenu, this, &MainMenu::show);
+	connect(exitWidget, &ConfirmationExitWidget::closeMainMenu, this, &MainMenu::close);
+
 
 	QFile file("styles/mainMenuStyle.qss");
 	file.open(QFile::ReadOnly);
@@ -87,7 +93,7 @@ void MainMenu::pressedOnExitButton()
 	QPixmap pixmap("exitButtonIconPressed.jpg");
 	QIcon buttonIcon(pixmap);
 	exitButton->setIcon(buttonIcon);
-	exitButton->setIconSize(QSize(36, 36));
+	exitButton->setIconSize(QSize(27, 27));
 }
 
 void MainMenu::releasedOnExitButton()
@@ -100,7 +106,9 @@ void MainMenu::releasedOnExitButton()
 
 void MainMenu::onClickedExitButton()
 {
-	this->close();
+	
+	exitWidget->show();
+	exitWidget->resize(350, 250);
 }
 
 void MainMenu::onClickedLadderButton()
