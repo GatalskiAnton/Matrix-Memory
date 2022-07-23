@@ -88,6 +88,7 @@
     <QtRcc Include="MatrixMemory.qrc" />
     <QtUic Include="MatrixMemory.ui" />
     <QtMoc Include="MatrixMemory.h" />
+    <ClCompile Include="confirmationExitWidget.cpp" />
     <ClCompile Include="gameField.cpp" />
     <ClCompile Include="ladderWidget.cpp" />
     <ClCompile Include="mainMenu.cpp" />
@@ -128,6 +129,9 @@
     <Font Include="fonts\d9464-arkhip_font.ttf" />
     <Font Include="fonts\gnyrwn971.ttf" />
     <Font Include="fonts\Nautilus.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="confirmationExitWidget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

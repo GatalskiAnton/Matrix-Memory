@@ -8,6 +8,7 @@
 #include <QVBoxLayout>
 #include <QFile>
 #include "ladderWidget.h"
+#include "confirmationExitWidget.h"
 
 class MainMenu : public QWidget
 {
@@ -33,4 +34,5 @@ private:
 	QPushButton* exitButton;
 	QPushButton* ladderButton;
 	LadderWidget* ladderWidget;
+	ConfirmationExitWidget* exitWidget;
 };
