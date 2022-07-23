@@ -1,18 +1,13 @@
-#include <QFont>
-#include <QFile>
 #include "mainMenu.h"
-#include <QFontDatabase>
-
 
 MainMenu::MainMenu(QWidget*)
 {
-	//infoWidget = new InfoWidget(this);
-	ladderWidget = new LadderWidget(this);
-
 	int id = QFontDatabase::addApplicationFont("fonts/Boomboom.otf");
 	QString family = QFontDatabase::applicationFontFamilies(id).at(0);
 	QFont Boomboom(family);
 	this->setFont(Boomboom);
+
+	this->setWindowFlags(Qt::FramelessWindowHint);
 
 	titleLabel = new QLabel("Matrix Memory", this);
 	playButton = new QPushButton("PLAY", this);
@@ -20,64 +15,92 @@ MainMenu::MainMenu(QWidget*)
 	tileLabel = new QLabel("Tile: 0");
 	recordLabel = new QLabel("Record: 0");
 	maxTileLabel = new QLabel("Max Tile: 0");
-	infoButton = new QPushButton("i", this);
+	exitButton = new QPushButton(this);
 	ladderButton = new QPushButton(this);
+	ladderWidget = new LadderWidget(this);
+
 	titleLabel->setObjectName("titleLabel");
 	playButton->setObjectName("playButton");
 	scoreLabel->setObjectName("scoreLabel");
 	tileLabel->setObjectName("tileLabel");
 	recordLabel->setObjectName("recordLabel");
 	maxTileLabel->setObjectName("maxTileLabel");
-	infoButton->setObjectName("infoButton");
+	exitButton->setObjectName("exitButton");
 	ladderButton->setObjectName("ladderButton");
 
-	titleLabel->setFont(QFont("Times", 50));
-	
-	QPixmap pixmap("ladderIcon.png");
-	QIcon buttonIcon(pixmap);
-	ladderButton->setIcon(buttonIcon);
-	ladderButton->setIconSize(QSize(36, 36))
-;
-	QFile file("styles/mainMenuStyle.qss");
-	file.open(QFile::ReadOnly);
-	setStyleSheet(file.readAll());
+	{
+		QPixmap pixmap("ladderIcon.png");
+		QIcon buttonIcon(pixmap);
+		ladderButton->setIcon(buttonIcon);
+		ladderButton->setIconSize(QSize(36, 36));
+	}
+
+	{
+		QPixmap pixmap("exitButtonIcon.jpg");
+		QIcon buttonIcon(pixmap);
+		exitButton->setIcon(buttonIcon);
+		exitButton->setIconSize(QSize(36, 36));
+	}
 
 	QVBoxLayout* verticalLayout = new QVBoxLayout(this);
 	QHBoxLayout* horizontaLayout = new QHBoxLayout(this);
+
 	verticalLayout->setSpacing(10);
 	verticalLayout->addWidget(titleLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
+	verticalLayout->addSpacing(50);
 	verticalLayout->addWidget(playButton, 0, Qt::AlignTop | Qt::AlignHCenter);
-	verticalLayout->setSpacing(75);
-	verticalLayout->addWidget(scoreLabel,0, Qt::AlignTop | Qt::AlignHCenter);
-	verticalLayout->addSpacing(-50);
+	verticalLayout->addSpacing(75);
+	verticalLayout->addWidget(scoreLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
+	verticalLayout->addSpacing(-20);
 	verticalLayout->addWidget(tileLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
-	verticalLayout->addSpacing(-50);
+	verticalLayout->addSpacing(-20);
 	verticalLayout->addWidget(recordLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
-	verticalLayout->addSpacing(-50);
+	verticalLayout->addSpacing(-20);
 	verticalLayout->addWidget(maxTileLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
-	verticalLayout->addSpacing(100);
-	verticalLayout->addWidget(infoButton, 0, Qt::AlignLeft | Qt::AlignBottom);
-	verticalLayout->addSpacing(-129);
+	verticalLayout->addSpacing(50);
+	verticalLayout->addWidget(exitButton, 0, Qt::AlignLeft | Qt::AlignBottom);
+	verticalLayout->addSpacing(-90);
 	verticalLayout->addWidget(ladderButton, 0, Qt::AlignRight | Qt::AlignBottom);
 	horizontaLayout->addLayout(verticalLayout);
 
 	connect(playButton, SIGNAL(clicked()), SLOT(onClickedPlayButton()));
-	connect(infoButton, SIGNAL(clicked()), SLOT(onClickedInfoButton()));
-	connect(ladderButton, SIGNAL(clicked()), SLOT(onClickedLadderButton()));
+	connect(exitButton, SIGNAL(pressed()), SLOT(pressedOnExitButton()));
+	connect(exitButton, SIGNAL(released()), SLOT(releasedOnExitButton()));
+	connect(exitButton, SIGNAL(clicked()), SLOT(onClickedExitButton()));
 	connect(ladderButton, SIGNAL(pressed()), SLOT(pressedOnLadderButton()));
 	connect(ladderButton, SIGNAL(released()), SLOT(releasedOnLadderButton()));
+	connect(ladderButton, SIGNAL(clicked()), SLOT(onClickedLadderButton()));
 	connect(ladderWidget, &LadderWidget::showMainMenu, this, &MainMenu::show);
+
+	QFile file("styles/mainMenuStyle.qss");
+	file.open(QFile::ReadOnly);
+	setStyleSheet(file.readAll());
 }
 
 void MainMenu::onClickedPlayButton()
 {
-	
+
 }
 
-void MainMenu::onClickedInfoButton()
+void MainMenu::pressedOnExitButton()
 {
-	/*infoWidget->show();
-	infoWidget->resize(450, 450);*/
+	QPixmap pixmap("exitButtonIconPressed.jpg");
+	QIcon buttonIcon(pixmap);
+	exitButton->setIcon(buttonIcon);
+	exitButton->setIconSize(QSize(36, 36));
+}
+
+void MainMenu::releasedOnExitButton()
+{
+	QPixmap pixmap("exitButtonIcon.jpg");
+	QIcon buttonIcon(pixmap);
+	exitButton->setIcon(buttonIcon);
+	exitButton->setIconSize(QSize(36, 36));
+}
+
+void MainMenu::onClickedExitButton()
+{
+	this->close();
 }
 
 void MainMenu::onClickedLadderButton()

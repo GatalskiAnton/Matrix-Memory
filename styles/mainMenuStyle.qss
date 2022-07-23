@@ -2,55 +2,57 @@
 	background-color: rgb(3,38,66);
 }
 #titleLabel {
+	font-size: 80px;
 	color: rgb(255,255,253);
 }
 #playButton {
-	width:  200px;
-	height: 200px;
+	min-width:  200px;
+	max-width:  200px;
+	min-height: 200px;
+	max-height: 200px;
 	border: 1.5px solid  rgb(255,255,253);
 	border-radius: 100px;
 	background-color:rgb(46,202,95);
-	color: rgb(255,255,253);
 	font-size: 75px;
+	color: rgb(255,255,253);
 }
 #playButton:pressed {
-	color: rgba(255,255,253,0.5);
 	font-size: 55px;
+	color: rgba(255,255,253,0.5);
 } 
 #scoreLabel {
-	color:rgb(255,255,253);
 	font-size: 25px;
+	color:rgb(255,255,253);
 }
 #tileLabel {
-	color:rgb(255,255,253);
 	font-size: 25px;
+	color:rgb(255,255,253);
 }
 #recordLabel {
-	color:rgb(255,255,253);
 	font-size: 25px;
+	color:rgb(255,255,253);
 }
 #maxTileLabel {
-	color:rgb(255,255,253);
 	font-size: 25px;
+	color:rgb(255,255,253);
 }
-#infoButton {
-	height:50px;
+#exitButton {
 	width: 50px;
+	height:50px;
 	border: 1.5px solid  rgb(255,255,253);
 	border-radius: 25px;
-	color:rgb(255,255,253);
-	font-size: 40px;
+	
 }
 #infoButton:pressed{
-	color: rgba(255,255,253,0.5);
 	font-size: 30px;
+	color: rgba(255,255,253,0.5);
 }
 #ladderButton {
-	height:50px;
 	width: 50px;
+	height:50px;
 	border: 1.5px solid  rgb(255,255,253);
 	border-radius: 25px;
 	background: #00ff00 url(ladderIcon.png);
-	color:rgb(255,255,253);
 	font-size: 40px;
+	color:rgb(255,255,253);
 }

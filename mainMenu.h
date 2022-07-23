@@ -3,9 +3,11 @@
 #include <QWidget>
 #include <QLabel>
 #include <QPushButton>
+#include <QFontDatabase>
+#include <QFont>
 #include <QVBoxLayout>
+#include <QFile>
 #include "ladderWidget.h"
-
 
 class MainMenu : public QWidget
 {
@@ -13,14 +15,14 @@ class MainMenu : public QWidget
 public:
 	explicit MainMenu(QWidget* parent = nullptr) ;
 	~MainMenu() = default;
-
 protected slots :
 	void onClickedPlayButton();
-	void onClickedInfoButton();
-	void onClickedLadderButton();
+	void pressedOnExitButton();
+	void releasedOnExitButton();
+	void onClickedExitButton();
 	void pressedOnLadderButton();
 	void releasedOnLadderButton();
-
+	void onClickedLadderButton();
 private:
 	QLabel* titleLabel;
 	QPushButton* playButton;
@@ -28,8 +30,7 @@ private:
 	QLabel* tileLabel;
 	QLabel* recordLabel;
 	QLabel* maxTileLabel;
-	QPushButton* infoButton;
+	QPushButton* exitButton;
 	QPushButton* ladderButton;
-	//InfoWidget* infoWidget;
 	LadderWidget* ladderWidget;
 };

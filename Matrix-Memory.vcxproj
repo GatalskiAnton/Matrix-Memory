@@ -103,6 +103,32 @@
   <ItemGroup>
     <QtMoc Include="ladderWidget.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="game_status.txt" />
+    <Text Include="statistics.txt" />
+    <Text Include="users.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="backButtonLadder.png" />
+    <Image Include="backButtonLadderPressed.png" />
+    <Image Include="exitButtonIcon.jpg" />
+    <Image Include="exitButtonIconPressed.jpg" />
+    <Image Include="ladderIcon.png" />
+    <Image Include="ladderIconPressed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+    <None Include="cpp.hint" />
+    <None Include="styles\leaderbordStyle.qss" />
+    <None Include="styles\mainMenuStyle.qss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="fonts\Alexander.otf" />
+    <Font Include="fonts\Boomboom.otf" />
+    <Font Include="fonts\d9464-arkhip_font.ttf" />
+    <Font Include="fonts\gnyrwn971.ttf" />
+    <Font Include="fonts\Nautilus.otf" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
     <Import Project="$(QtMsBuild)\qt.targets" />
