@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainMenu startMenu;
-    startMenu.resize(750, 900);
+    startMenu.setFixedSize(750, 900);
     startMenu.show();
     
     return a.exec();

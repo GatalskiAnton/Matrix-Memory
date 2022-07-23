@@ -11,10 +11,11 @@
 	border-radius: 100px;
 	background-color:rgb(46,202,95);
 	color: rgb(255,255,253);
-	font-size: 50px;
+	font-size: 75px;
 }
 #playButton:pressed {
-	font-size: 20px;
+	color: rgba(255,255,253,0.5);
+	font-size: 55px;
 } 
 #scoreLabel {
 	color:rgb(255,255,253);
@@ -39,6 +40,10 @@
 	border-radius: 25px;
 	color:rgb(255,255,253);
 	font-size: 40px;
+}
+#infoButton:pressed{
+	color: rgba(255,255,253,0.5);
+	font-size: 30px;
 }
 #ladderButton {
 	height:50px;
