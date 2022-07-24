@@ -7,8 +7,6 @@ ConfirmationExitWidget::ConfirmationExitWidget(QWidget* parent)
 	QFont Boomboom(family);
 	setFont(Boomboom);
 
-	setWindowFlags(Qt::FramelessWindowHint);
-
 	yesButton = new QPushButton("Yes", this);
 	noButton = new QPushButton("No", this);
 	textLabel = new QLabel("Do you really want to quit?", this);

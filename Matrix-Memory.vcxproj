@@ -85,6 +85,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="user.cpp" />
     <QtRcc Include="MatrixMemory.qrc" />
     <QtUic Include="MatrixMemory.ui" />
     <QtMoc Include="MatrixMemory.h" />
@@ -137,6 +138,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="loginWidget.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="user.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

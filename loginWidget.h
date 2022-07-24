@@ -6,6 +6,9 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include "mainMenu.h"
+#include "user.h"
+
 
 class LoginWidget : public QWidget
 {
@@ -13,11 +16,15 @@ class LoginWidget : public QWidget
 public:
 	explicit LoginWidget(QWidget* parent = nullptr);
 	~LoginWidget() = default;
+protected slots:
+	void onClickedLoginButton();
+	void onClickedCancelButton();
 private:
 	QLabel* loginLabel;
 	QLabel* passwordLabel;
 	QLineEdit* loginEdit;
 	QLineEdit* passwordEdit;
+	QPushButton* registerButton;
 	QPushButton* loginButton;
 	QPushButton* cancelButton;
 };

@@ -7,8 +7,6 @@ MainMenu::MainMenu(QWidget*)
 	QFont Boomboom(family);
 	setFont(Boomboom);
 
-	setWindowFlags(Qt::FramelessWindowHint);
-
 	titleLabel = new QLabel("Matrix Memory", this);
 	playButton = new QPushButton("PLAY", this);
 	scoreLabel = new QLabel("Score: 0", this);
