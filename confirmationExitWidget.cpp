@@ -5,11 +5,14 @@ ConfirmationExitWidget::ConfirmationExitWidget(QWidget* parent)
 	int id = QFontDatabase::addApplicationFont("fonts/Boomboom.otf");
 	QString family = QFontDatabase::applicationFontFamilies(id).at(0);
 	QFont Boomboom(family);
-	this->setFont(Boomboom);
+	setFont(Boomboom);
+
+	setWindowFlags(Qt::FramelessWindowHint);
 
 	yesButton = new QPushButton("Yes", this);
 	noButton = new QPushButton("No", this);
-	QLabel* textLabel = new QLabel("Do you really want to Exit?", this);
+	textLabel = new QLabel("Do you really want to quit?", this);
+
 	textLabel->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
 
 	QVBoxLayout* verticalLayout = new QVBoxLayout(this);
@@ -27,16 +30,15 @@ ConfirmationExitWidget::ConfirmationExitWidget(QWidget* parent)
 	QFile file("styles/exitWidgetStyle.qss");
 	file.open(QFile::ReadOnly);
 	setStyleSheet(file.readAll());
-
 }
 
 void ConfirmationExitWidget::onClickedYesButton()
 {
-	this->close();
+	close();
 	emit closeMainMenu();
 }
 
 void ConfirmationExitWidget::onClickedNoButton()
 {
-	this->close();
+	close();
 }

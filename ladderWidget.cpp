@@ -5,9 +5,9 @@ LadderWidget::LadderWidget(QWidget* parent)
 	int id = QFontDatabase::addApplicationFont("fonts/Boomboom.otf");
 	QString family = QFontDatabase::applicationFontFamilies(id).at(0);
 	QFont Boomboom(family);
-	this->setFont(Boomboom);
+	setFont(Boomboom);
 
-	this->setWindowFlags(Qt::FramelessWindowHint);
+	setWindowFlags(Qt::FramelessWindowHint);
 
 	titleLabel = new QLabel("Leaderbord", this);
 	ladderList = new QListWidget(this);
@@ -49,7 +49,7 @@ LadderWidget::LadderWidget(QWidget* parent)
 
 void LadderWidget::onClickedBackButton()
 {
-	this->close();
+	close();
 	emit showMainMenu();
 }
 
@@ -81,5 +81,5 @@ void LadderWidget::releasedOnBackButton()
 
 void LadderWidget::onClickedExitButton()
 {
-	this->close();
+	close();
 }

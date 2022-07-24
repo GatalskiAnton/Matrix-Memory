@@ -91,6 +91,7 @@
     <ClCompile Include="confirmationExitWidget.cpp" />
     <ClCompile Include="gameField.cpp" />
     <ClCompile Include="ladderWidget.cpp" />
+    <ClCompile Include="loginWidget.cpp" />
     <ClCompile Include="mainMenu.cpp" />
     <ClCompile Include="MatrixMemory.cpp" />
     <ClCompile Include="main.cpp" />
@@ -120,6 +121,7 @@
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="cpp.hint" />
+    <None Include="styles\exitWidgetStyle.qss" />
     <None Include="styles\leaderbordStyle.qss" />
     <None Include="styles\mainMenuStyle.qss" />
   </ItemGroup>
@@ -132,6 +134,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="confirmationExitWidget.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="loginWidget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

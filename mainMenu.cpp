@@ -2,14 +2,12 @@
 
 MainMenu::MainMenu(QWidget*)
 {
-
-
 	int id = QFontDatabase::addApplicationFont("fonts/Boomboom.otf");
 	QString family = QFontDatabase::applicationFontFamilies(id).at(0);
 	QFont Boomboom(family);
-	this->setFont(Boomboom);
+	setFont(Boomboom);
 
-	this->setWindowFlags(Qt::FramelessWindowHint);
+	setWindowFlags(Qt::FramelessWindowHint);
 
 	titleLabel = new QLabel("Matrix Memory", this);
 	playButton = new QPushButton("PLAY", this);
@@ -77,7 +75,6 @@ MainMenu::MainMenu(QWidget*)
 	connect(ladderWidget, &LadderWidget::showMainMenu, this, &MainMenu::show);
 	connect(exitWidget, &ConfirmationExitWidget::closeMainMenu, this, &MainMenu::close);
 
-
 	QFile file("styles/mainMenuStyle.qss");
 	file.open(QFile::ReadOnly);
 	setStyleSheet(file.readAll());
@@ -106,7 +103,6 @@ void MainMenu::releasedOnExitButton()
 
 void MainMenu::onClickedExitButton()
 {
-	
 	exitWidget->show();
 	exitWidget->resize(350, 250);
 }
@@ -115,7 +111,7 @@ void MainMenu::onClickedLadderButton()
 {
 	ladderWidget->show();
 	ladderWidget->resize(500, 500);
-	this->close();
+	close();
 }
 
 void MainMenu::pressedOnLadderButton()

@@ -6,6 +6,7 @@
 #include <QFontDatabase>
 #include <QFont>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QFile>
 #include "ladderWidget.h"
 #include "confirmationExitWidget.h"

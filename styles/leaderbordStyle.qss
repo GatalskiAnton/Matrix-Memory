@@ -1,27 +1,17 @@
 * {
+	border:none;
+	outline: none; 
 	background-color: rgb(3,38,66);
-}
-#titleLabel { 
-	font-size:25px;
+	font-size: 25px;
 	color:rgb(255,255,253);
 }
 #ladderList {
 	margin: 10px;
-	background: qlineargradient(x1:1, y1:1, x2:0, y2:0, stop: 0 rgb(20,43,51), stop: 1 rgb(5,41,55));
 	border: 1px solid rgb(3,38,66);
 	border-radius: 30px;
-	color:rgb(255,255,253);
-}
-#backButton {
-	border:none;	
-	font-size: 25px;
-	color:rgb(255,255,253);
+	background: qlineargradient(x1:1, y1:1, x2:0, y2:0, stop: 0 rgb(20,43,51), stop: 1 rgb(5,41,55));
 }
 #backButton:pressed {
 	font-size:20px;
 	color:rgba(255,255,253,0.5);
-}
-#exitButton {
-	border:none;
-	outline: none; 
 }

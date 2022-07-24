@@ -1,19 +1,18 @@
-*{
+* {
 	background-color:rgb(3,38,66);
+	color:rgb(255,255,253);
 }
-QPushButton{
+QPushButton {
 	width:150px;
 	height:50px;
-	font-size:25px;
-	color:rgb(255,255,253);
 	border: 1.5px solid  rgb(255,255,253);
 	border-radius: 10px;
+	font-size:25px;
 }
-QPushButton:pressed{
+QPushButton:pressed {
 	font-size:20px;
 	color:rgba(255,255,253,0.5);
 }
-QLabel{
+QLabel {
 	font-size:30px;
-	color:rgb(255,255,253);
 }
