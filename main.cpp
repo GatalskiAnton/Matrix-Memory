@@ -1,4 +1,5 @@
 #include "MatrixMemory.h"
+#include "loginWidget.h"
 #include <QtWidgets/QApplication>
 #include "gameField.h"
 #include "mainMenu.h"
@@ -6,9 +7,8 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainMenu startMenu;
-    startMenu.setFixedSize(750, 900);
-    startMenu.show();
+    LoginWidget lg;
+    lg.show();
     
     return a.exec();
 }

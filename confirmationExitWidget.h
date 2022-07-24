@@ -1,12 +1,13 @@
 #pragma once
+
 #include <QWidget>
-#include <QPushButton>
-#include <QHBoxLayout>
-#include <QVBoxLayout>
 #include <QLabel>
-#include <QListWidget>
-#include <QFile>
+#include <QPushButton>
 #include <QFontDatabase>
+#include <QFont>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QFile>
 
 class ConfirmationExitWidget:public QWidget
 {
@@ -20,7 +21,7 @@ protected slots:
 signals:
 	void closeMainMenu();
 private:
+	QLabel* textLabel;
 	QPushButton* yesButton;
 	QPushButton* noButton;
 };
-
