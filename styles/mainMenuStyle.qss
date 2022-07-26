@@ -38,3 +38,28 @@
 	background: url(ladderIcon.png);
 	font-size: 40px;
 }
+QMenu {
+    pading:2px; 
+    border: 1.5px solid  rgb(255,255,253);
+    border-radius:15px;
+}
+QMenu:hover{
+	pading:2px; 
+    border: 1.5px solid  rgb(255,255,253);
+    border-radius:15px;
+}
+
+
+QMenuBar{
+	 border-radius:15px;
+	 font-size:20px;
+	 spacing:0px;
+	 border: 1.5px solid  rgb(255,255,253);
+}
+
+QMenuBar:hover {
+   	background-color: rgba(3,38,66,0.5);
+}
+
+QMenu::item{
+	  background-color: qlineargradient(x1:1, y1:1, x2:0, y2:0, stop: 0 rgb(20,43,51), stop: 1 rgb(5,41,55));
