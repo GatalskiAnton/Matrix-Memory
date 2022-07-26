@@ -1,6 +1,6 @@
 #include "mainMenu.h"
 
-MainMenu::MainMenu(QWidget*)
+MainMenu::MainMenu(const User &user, QWidget* parent = nullptr)
 {
 	int id = QFontDatabase::addApplicationFont("fonts/Boomboom.otf");
 	QString family = QFontDatabase::applicationFontFamilies(id).at(0);

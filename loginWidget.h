@@ -8,7 +8,7 @@
 #include <QHBoxLayout>
 #include "mainMenu.h"
 #include "user.h"
-
+#include "createAccountWidget.h"
 
 class LoginWidget : public QWidget
 {
@@ -19,6 +19,7 @@ public:
 protected slots:
 	void onClickedLoginButton();
 	void onClickedCancelButton();
+	void onClickedRegisterButton();
 private:
 	QLabel* loginLabel;
 	QLabel* passwordLabel;
@@ -27,4 +28,5 @@ private:
 	QPushButton* registerButton;
 	QPushButton* loginButton;
 	QPushButton* cancelButton;
+	CreateAccountWidget* registrationWidget;
 };

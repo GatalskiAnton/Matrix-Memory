@@ -10,12 +10,13 @@
 #include <QFile>
 #include "ladderWidget.h"
 #include "confirmationExitWidget.h"
+#include "user.h"
 
 class MainMenu : public QWidget
 {
 	Q_OBJECT
 public:
-	explicit MainMenu(QWidget* parent = nullptr) ;
+	explicit MainMenu(const User &, QWidget* );
 	~MainMenu() = default;
 protected slots :
 	void onClickedPlayButton();
@@ -36,4 +37,5 @@ private:
 	QPushButton* ladderButton;
 	LadderWidget* ladderWidget;
 	ConfirmationExitWidget* exitWidget;
+	User user_;
 };
