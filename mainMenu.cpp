@@ -7,6 +7,9 @@ MainMenu::MainMenu(const User &user, QWidget* parent = nullptr)
 	QFont Boomboom(family);
 	setFont(Boomboom);
 
+
+	gameFieldWidget = new GameField(this);
+
 	titleLabel = new QLabel("Matrix Memory", this);
 	playButton = new QPushButton("PLAY", this);
 	scoreLabel = new QLabel("Score: 0", this);
@@ -72,6 +75,7 @@ MainMenu::MainMenu(const User &user, QWidget* parent = nullptr)
 	connect(ladderButton, SIGNAL(clicked()), SLOT(onClickedLadderButton()));
 	connect(ladderWidget, &LadderWidget::showMainMenu, this, &MainMenu::show);
 	connect(exitWidget, &ConfirmationExitWidget::closeMainMenu, this, &MainMenu::close);
+	connect(gameFieldWidget, &GameField::showMainMenu, this, &MainMenu::show);
 
 	QFile file("styles/mainMenuStyle.qss");
 	file.open(QFile::ReadOnly);
@@ -80,7 +84,10 @@ MainMenu::MainMenu(const User &user, QWidget* parent = nullptr)
 
 void MainMenu::onClickedPlayButton()
 {
+	close();
 
+
+	gameFieldWidget->show();
 }
 
 void MainMenu::onClickedChangeAccountButton()

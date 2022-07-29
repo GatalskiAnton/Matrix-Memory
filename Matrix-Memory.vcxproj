@@ -86,6 +86,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="createAccountWidget.cpp" />
+    <ClCompile Include="myButton.cpp" />
     <ClCompile Include="user.cpp" />
     <QtRcc Include="MatrixMemory.qrc" />
     <QtUic Include="MatrixMemory.ui" />
@@ -142,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="createAccountWidget.h" />
+    <ClInclude Include="myButton.h" />
     <ClInclude Include="user.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

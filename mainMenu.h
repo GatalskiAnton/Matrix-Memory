@@ -17,6 +17,8 @@
 #include <QMenuBar>
 #include <QAction>
 #include "loginWidget.h"
+#include "gameField.h"
+
 
 class MainMenu : public QWidget
 {
@@ -43,4 +45,5 @@ private:
 	ConfirmationExitWidget* exitWidget;
 	User user_;
 	QComboBox* box;
+	GameField* gameFieldWidget;
 };
