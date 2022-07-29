@@ -3,6 +3,13 @@
 	font-size: 25px;
 	color:rgb(255,255,253);
 }
+@font-face {
+font-family: "BoomBoom"; 
+src: url("../fonts/Boomboom.otf") format("truetype"); 
+font-style: normal; 
+font-weight: normal; 
+} 
+
 #titleLabel {
 	font-size: 80px;
 }
@@ -39,27 +46,16 @@
 	font-size: 40px;
 }
 QMenu {
-    pading:2px; 
-    border: 1.5px solid  rgb(255,255,253);
-    border-radius:15px;
+    	border: 1.5px solid  rgb(255,255,253);
+    	border-radius:15px;
+	font-family:BoomBoom;
+  	
 }
 QMenu:hover{
-	pading:2px; 
-    border: 1.5px solid  rgb(255,255,253);
-    border-radius:15px;
+	background-color: rgb(3,38,66);
 }
-
-
-QMenuBar{
-	 border-radius:15px;
-	 font-size:20px;
-	 spacing:0px;
-	 border: 1.5px solid  rgb(255,255,253);
+QMenuBar{ 
+	border: 1.5px solid  rgb(255,255,253);
+	font-family:BoomBoom;	
+	border-radius:15px;
 }
-
-QMenuBar:hover {
-   	background-color: rgba(3,38,66,0.5);
-}
-
-QMenu::item{
-	  background-color: qlineargradient(x1:1, y1:1, x2:0, y2:0, stop: 0 rgb(20,43,51), stop: 1 rgb(5,41,55));
