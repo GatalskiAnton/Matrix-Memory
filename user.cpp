@@ -8,6 +8,12 @@ std::istream& operator>>(std::istream& input, User& user)
 	return input;
 }
 
+std::ostream& operator<<(std::ostream& output, const User& user)
+{
+	output << user.getLogin() << " " << user.getPassword() << '\n';
+	return output;
+}
+
 std::list<User> User::getUsers()
 {
 	std::list<User> users;

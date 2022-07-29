@@ -8,23 +8,31 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QFile>
+#include <QComboBox>
 #include "ladderWidget.h"
 #include "confirmationExitWidget.h"
+#include "user.h"
+#include <QAction>
+#include <QMenu>
+#include <QMenuBar>
+#include <QAction>
+#include "loginWidget.h"
+#include "gameField.h"
+
 
 class MainMenu : public QWidget
 {
 	Q_OBJECT
 public:
-	explicit MainMenu(QWidget* parent = nullptr) ;
+	explicit MainMenu(const User &, QWidget* );
 	~MainMenu() = default;
 protected slots :
 	void onClickedPlayButton();
-	void pressedOnExitButton();
-	void releasedOnExitButton();
 	void onClickedExitButton();
 	void pressedOnLadderButton();
 	void releasedOnLadderButton();
 	void onClickedLadderButton();
+	void onClickedChangeAccountButton();
 private:
 	QLabel* titleLabel;
 	QPushButton* playButton;
@@ -32,8 +40,10 @@ private:
 	QLabel* tileLabel;
 	QLabel* recordLabel;
 	QLabel* maxTileLabel;
-	QPushButton* exitButton;
 	QPushButton* ladderButton;
 	LadderWidget* ladderWidget;
 	ConfirmationExitWidget* exitWidget;
+	User user_;
+	QComboBox* box;
+	GameField* gameFieldWidget;
 };

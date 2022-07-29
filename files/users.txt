@@ -1,3 +1,7 @@
 1 1 
 player1 1234
-player2 3213
+player2 1234
+sashka 3
+123 5
+5 5
+123 555

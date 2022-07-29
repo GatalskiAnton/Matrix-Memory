@@ -3,6 +3,8 @@
 
 LoginWidget::LoginWidget(QWidget* parent)
 {
+	registrationWidget = new CreateAccountWidget(this);
+
 	loginLabel = new QLabel(tr("Login"), this);
 	passwordLabel = new QLabel(tr("Password"), this);
 	loginEdit = new QLineEdit(this);
@@ -14,7 +16,7 @@ LoginWidget::LoginWidget(QWidget* parent)
 	registerButton->setObjectName("registerButton");
 
 	passwordEdit->setEchoMode(QLineEdit::Password);
-
+	
 	QVBoxLayout* loginFieldLayout = new QVBoxLayout(this);
 	QHBoxLayout* mainLayout = new QHBoxLayout(this);
 	QHBoxLayout* buttonLayout = new QHBoxLayout(this);
@@ -31,6 +33,10 @@ LoginWidget::LoginWidget(QWidget* parent)
 
 	connect(loginButton, SIGNAL(clicked()), SLOT(onClickedLoginButton()));
 	connect(cancelButton, SIGNAL(clicked()), SLOT(onClickedCancelButton()));
+	connect(registerButton, SIGNAL(clicked()), SLOT(onClickedRegisterButton()));
+
+	connect(registrationWidget, &CreateAccountWidget::showLoginWidget, this, &LoginWidget::show);
+
 
 	QFile file("styles/loginWidgetStyle.qss");
 	file.open(QFile::ReadOnly);
@@ -46,14 +52,22 @@ void LoginWidget::onClickedLoginButton()
 		if (loginEdit->text() == QString::fromStdString(user.getLogin()) && passwordEdit->text() == QString::fromStdString(user.getPassword()))
 		{
 			close();
-			MainMenu* menu = new MainMenu(this);
+			User player(loginEdit->text().toStdString(), passwordEdit->text().toStdString());
+			MainMenu* menu = new MainMenu(player,this);
 			menu->show();
 			menu->resize(750, 900);
+			menu->move(width(), height() / 2);
 		}
 	}
 }
 
 void LoginWidget::onClickedCancelButton()
 {
+	close();
+}
+
+void LoginWidget::onClickedRegisterButton()
+{
+	registrationWidget->show();
 	close();
 }

@@ -3,6 +3,13 @@
 	font-size: 25px;
 	color:rgb(255,255,253);
 }
+@font-face {
+font-family: "BoomBoom"; 
+src: url("../fonts/Boomboom.otf") format("truetype"); 
+font-style: normal; 
+font-weight: normal; 
+} 
+
 #titleLabel {
 	font-size: 80px;
 }
@@ -37,4 +44,18 @@
 	border-radius: 25px;
 	background: url(ladderIcon.png);
 	font-size: 40px;
+}
+QMenu {
+    	border: 1.5px solid  rgb(255,255,253);
+    	border-radius:15px;
+	font-family:BoomBoom;
+  	
+}
+QMenu:hover{
+	background-color: rgb(3,38,66);
+}
+QMenuBar{ 
+	border: 1.5px solid  rgb(255,255,253);
+	font-family:BoomBoom;	
+	border-radius:15px;
 }

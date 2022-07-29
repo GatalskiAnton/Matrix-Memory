@@ -27,3 +27,8 @@ QLineEdit{
 	font-size:8px;
 	color:rgba(255,255,253,0.5);
 }
+#wrongPasswordLabel{
+	font-size 10px;
+	color:red;
+	text-decoration: underline;
+}

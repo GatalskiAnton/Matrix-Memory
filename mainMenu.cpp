@@ -1,11 +1,14 @@
 #include "mainMenu.h"
 
-MainMenu::MainMenu(QWidget*)
+MainMenu::MainMenu(const User &user, QWidget* parent = nullptr)
 {
 	int id = QFontDatabase::addApplicationFont("fonts/Boomboom.otf");
 	QString family = QFontDatabase::applicationFontFamilies(id).at(0);
 	QFont Boomboom(family);
 	setFont(Boomboom);
+
+
+	gameFieldWidget = new GameField(this);
 
 	titleLabel = new QLabel("Matrix Memory", this);
 	playButton = new QPushButton("PLAY", this);
@@ -13,11 +16,21 @@ MainMenu::MainMenu(QWidget*)
 	tileLabel = new QLabel("Tile: 0");
 	recordLabel = new QLabel("Record: 0");
 	maxTileLabel = new QLabel("Max Tile: 0");
-	exitButton = new QPushButton(this);
 	ladderButton = new QPushButton(this);
 	ladderWidget = new LadderWidget(this);
 	exitWidget = new ConfirmationExitWidget(this);
 	exitWidget->hide();
+
+	QMenu* menu = new QMenu(QString::fromStdString(user.getLogin()), this);
+	QMenuBar* menuBar = new QMenuBar(this);
+	menuBar->setObjectName("menuBar");
+	menuBar->setDefaultUp(true);
+
+	QAction* exitAction = new QAction("Exit",this);
+	QAction* changeAccountAction = new QAction("Change account", this);
+	menu->addAction(exitAction);
+	menu->addAction(changeAccountAction);
+	menuBar->addMenu(menu);
 
 	titleLabel->setObjectName("titleLabel");
 	playButton->setObjectName("playButton");
@@ -25,22 +38,12 @@ MainMenu::MainMenu(QWidget*)
 	tileLabel->setObjectName("tileLabel");
 	recordLabel->setObjectName("recordLabel");
 	maxTileLabel->setObjectName("maxTileLabel");
-	exitButton->setObjectName("exitButton");
 	ladderButton->setObjectName("ladderButton");
 
-	{
-		QPixmap pixmap("ladderIcon.png");
-		QIcon buttonIcon(pixmap);
-		ladderButton->setIcon(buttonIcon);
-		ladderButton->setIconSize(QSize(36, 36));
-	}
-
-	{
-		QPixmap pixmap("exitButtonIcon.jpg");
-		QIcon buttonIcon(pixmap);
-		exitButton->setIcon(buttonIcon);
-		exitButton->setIconSize(QSize(36, 36));
-	}
+	QPixmap pixmap("ladderIcon.png");
+	QIcon buttonIcon(pixmap);
+	ladderButton->setIcon(buttonIcon);
+	ladderButton->setIconSize(QSize(36, 36));
 
 	QVBoxLayout* verticalLayout = new QVBoxLayout(this);
 	QHBoxLayout* horizontaLayout = new QHBoxLayout(this);
@@ -58,20 +61,21 @@ MainMenu::MainMenu(QWidget*)
 	verticalLayout->addSpacing(-20);
 	verticalLayout->addWidget(maxTileLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
 	verticalLayout->addSpacing(50);
-	verticalLayout->addWidget(exitButton, 0, Qt::AlignLeft | Qt::AlignBottom);
+	verticalLayout->addWidget(menuBar, 0, Qt::AlignLeft | Qt::AlignBottom);
 	verticalLayout->addSpacing(-90);
 	verticalLayout->addWidget(ladderButton, 0, Qt::AlignRight | Qt::AlignBottom);
 	horizontaLayout->addLayout(verticalLayout);
 
 	connect(playButton, SIGNAL(clicked()), SLOT(onClickedPlayButton()));
-	connect(exitButton, SIGNAL(pressed()), SLOT(pressedOnExitButton()));
-	connect(exitButton, SIGNAL(released()), SLOT(releasedOnExitButton()));
-	connect(exitButton, SIGNAL(clicked()), SLOT(onClickedExitButton()));
+	connect(exitAction, SIGNAL(triggered()), SLOT(onClickedExitButton()));
+	connect(changeAccountAction, SIGNAL(triggered()), SLOT(onClickedChangeAccountButton()));
+
 	connect(ladderButton, SIGNAL(pressed()), SLOT(pressedOnLadderButton()));
 	connect(ladderButton, SIGNAL(released()), SLOT(releasedOnLadderButton()));
 	connect(ladderButton, SIGNAL(clicked()), SLOT(onClickedLadderButton()));
 	connect(ladderWidget, &LadderWidget::showMainMenu, this, &MainMenu::show);
 	connect(exitWidget, &ConfirmationExitWidget::closeMainMenu, this, &MainMenu::close);
+	connect(gameFieldWidget, &GameField::showMainMenu, this, &MainMenu::show);
 
 	QFile file("styles/mainMenuStyle.qss");
 	file.open(QFile::ReadOnly);
@@ -80,24 +84,19 @@ MainMenu::MainMenu(QWidget*)
 
 void MainMenu::onClickedPlayButton()
 {
+	close();
 
+
+	gameFieldWidget->show();
 }
 
-void MainMenu::pressedOnExitButton()
+void MainMenu::onClickedChangeAccountButton()
 {
-	QPixmap pixmap("exitButtonIconPressed.jpg");
-	QIcon buttonIcon(pixmap);
-	exitButton->setIcon(buttonIcon);
-	exitButton->setIconSize(QSize(27, 27));
+	LoginWidget* loginWidget = new LoginWidget(this);
+	close();
+	loginWidget->show();
 }
 
-void MainMenu::releasedOnExitButton()
-{
-	QPixmap pixmap("exitButtonIcon.jpg");
-	QIcon buttonIcon(pixmap);
-	exitButton->setIcon(buttonIcon);
-	exitButton->setIconSize(QSize(36, 36));
-}
 
 void MainMenu::onClickedExitButton()
 {

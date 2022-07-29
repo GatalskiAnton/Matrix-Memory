@@ -17,3 +17,4 @@ private:
 	std::string password_;
 };
 std::istream& operator>>(std::istream&, User&);
+std::ostream& operator<<(std::ostream&, const User&);
