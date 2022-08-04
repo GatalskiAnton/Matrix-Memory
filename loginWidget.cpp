@@ -1,5 +1,5 @@
 #include "loginWidget.h"
-#include <QMessageBox>
+
 
 LoginWidget::LoginWidget(QWidget* parent)
 {
@@ -52,8 +52,7 @@ void LoginWidget::onClickedLoginButton()
 		if (loginEdit->text() == QString::fromStdString(user.getLogin()) && passwordEdit->text() == QString::fromStdString(user.getPassword()))
 		{
 			close();
-			User player(loginEdit->text().toStdString(), passwordEdit->text().toStdString());
-			MainMenu* menu = new MainMenu(player,this);
+			MainMenu* menu = new MainMenu(user,this);
 			menu->show();
 			menu->resize(750, 900);
 			menu->move(width(), height() / 2);

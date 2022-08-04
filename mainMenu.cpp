@@ -1,27 +1,24 @@
 #include "mainMenu.h"
 
-MainMenu::MainMenu(const User &user, QWidget* parent = nullptr)
+MainMenu::MainMenu(const User &user, QWidget* parent = nullptr):user_(user)
 {
 	int id = QFontDatabase::addApplicationFont("fonts/Boomboom.otf");
 	QString family = QFontDatabase::applicationFontFamilies(id).at(0);
 	QFont Boomboom(family);
 	setFont(Boomboom);
 
-
-	gameFieldWidget = new GameField(this);
-
 	titleLabel = new QLabel("Matrix Memory", this);
 	playButton = new QPushButton("PLAY", this);
-	scoreLabel = new QLabel("Score: 0", this);
-	tileLabel = new QLabel("Tile: 0");
-	recordLabel = new QLabel("Record: 0");
-	maxTileLabel = new QLabel("Max Tile: 0");
+	scoreLabel = new QLabel("Score: ", this);
+	tileLabel = new QLabel("Tile: ", this);
+	recordLabel = new QLabel("Record: " + QString::number(user_.getRecord()),this);
+	maxTileLabel = new QLabel("Max Tile: " + QString::number(user_.getMaxTile()),this);
 	ladderButton = new QPushButton(this);
 	ladderWidget = new LadderWidget(this);
 	exitWidget = new ConfirmationExitWidget(this);
 	exitWidget->hide();
 
-	QMenu* menu = new QMenu(QString::fromStdString(user.getLogin()), this);
+	QMenu* menu = new QMenu(QString::fromStdString(user_.getLogin()), this);
 	QMenuBar* menuBar = new QMenuBar(this);
 	menuBar->setObjectName("menuBar");
 	menuBar->setDefaultUp(true);
@@ -75,19 +72,19 @@ MainMenu::MainMenu(const User &user, QWidget* parent = nullptr)
 	connect(ladderButton, SIGNAL(clicked()), SLOT(onClickedLadderButton()));
 	connect(ladderWidget, &LadderWidget::showMainMenu, this, &MainMenu::show);
 	connect(exitWidget, &ConfirmationExitWidget::closeMainMenu, this, &MainMenu::close);
-	connect(gameFieldWidget, &GameField::showMainMenu, this, &MainMenu::show);
 
 	QFile file("styles/mainMenuStyle.qss");
 	file.open(QFile::ReadOnly);
 	setStyleSheet(file.readAll());
 }
 
+
 void MainMenu::onClickedPlayButton()
 {
+	GameField* gameFieldWidget = new GameField(user_,this);
 	close();
-
-
 	gameFieldWidget->show();
+	gameFieldWidget->setFixedSize(850, 900);
 }
 
 void MainMenu::onClickedChangeAccountButton()
@@ -125,4 +122,12 @@ void MainMenu::releasedOnLadderButton()
 	QIcon buttonIcon(pixmap);
 	ladderButton->setIcon(buttonIcon);
 	ladderButton->setIconSize(QSize(36, 36));
+}
+
+void MainMenu::restartGame()
+{
+	MainMenu* newMenu = new MainMenu(user_, this);
+	close();
+	newMenu->show();
+	newMenu->resize(750, 900);
 }
