@@ -2,15 +2,18 @@
 
 std::istream& operator>>(std::istream& input, User& user)
 {
-	std::string login, password;
-	input >> login >> password;
-	user = User(login,password);
+	std::string login;
+	std::string password;
+	int record;
+	int maxTile;
+	input >> login >> password >> record >> maxTile;
+	user = User(login,password, record, maxTile);
 	return input;
 }
 
 std::ostream& operator<<(std::ostream& output, const User& user)
 {
-	output << user.getLogin() << " " << user.getPassword() << '\n';
+	output << user.getLogin() << " " << user.getPassword() << " " << user.getRecord() << " " << user.getMaxTile() << '\n';
 	return output;
 }
 
@@ -34,4 +37,24 @@ std::string User::getLogin() const
 std::string User::getPassword() const
 {
 	return password_;
+}
+
+int User::getRecord() const
+{
+	return record_;
+}
+
+int User::getMaxTile() const
+{
+	return maxTile_;
+}
+
+void User::setRecord(int record) 
+{
+	record_ = record;
+}
+
+void User::setMaxTile(int maxTile) 
+{
+	maxTile_ = maxTile;
 }

@@ -33,6 +33,7 @@ protected slots :
 	void releasedOnLadderButton();
 	void onClickedLadderButton();
 	void onClickedChangeAccountButton();
+	void restartGame();
 private:
 	QLabel* titleLabel;
 	QPushButton* playButton;
@@ -45,5 +46,4 @@ private:
 	ConfirmationExitWidget* exitWidget;
 	User user_;
 	QComboBox* box;
-	GameField* gameFieldWidget;
 };
