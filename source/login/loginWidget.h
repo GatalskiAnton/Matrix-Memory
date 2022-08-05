@@ -6,8 +6,8 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
-#include "mainMenu.h"
-#include "user.h"
+#include "../menu/mainMenu.h"
+#include "../user/user.h"
 #include "createAccountWidget.h"
 
 class LoginWidget : public QWidget
@@ -25,6 +25,7 @@ private:
 	QLabel* passwordLabel;
 	QLineEdit* loginEdit;
 	QLineEdit* passwordEdit;
+	QLabel* wrongPasswordLabel;
 	QPushButton* registerButton;
 	QPushButton* loginButton;
 	QPushButton* cancelButton;

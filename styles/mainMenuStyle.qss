@@ -42,20 +42,28 @@ font-weight: normal;
 	height:50px;
 	border: 1.5px solid  rgb(255,255,253);
 	border-radius: 25px;
-	background: url(ladderIcon.png);
 	font-size: 40px;
 }
 QMenu {
-    	border: 1.5px solid  rgb(255,255,253);
-    	border-radius:15px;
-	font-family:BoomBoom;
-  	
+    border: 1.5px solid  rgb(255,255,253);
+
 }
-QMenu:hover{
-	background-color: rgb(3,38,66);
+QMenu:pressed {
+	color: rgba(255,255,253,0.5);
 }
 QMenuBar{ 
+	min-width: 100px;
 	border: 1.5px solid  rgb(255,255,253);
+	outline:none;
+	font-family:BoomBoom;	
+	border-radius:15px;
+}
+
+QToolButton::menu-indicator { width: 0px; }
+
+QToolButton {
+	border: 1.5px solid  rgb(255,255,253);
+	outline:none;
 	font-family:BoomBoom;	
 	border-radius:15px;
 }

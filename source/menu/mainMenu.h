@@ -11,13 +11,13 @@
 #include <QComboBox>
 #include "ladderWidget.h"
 #include "confirmationExitWidget.h"
-#include "user.h"
+#include "../user/user.h"
 #include <QAction>
 #include <QMenu>
 #include <QMenuBar>
 #include <QAction>
-#include "loginWidget.h"
-#include "gameField.h"
+#include "../login/loginWidget.h"
+#include "../game/gameField.h"
 
 
 class MainMenu : public QWidget
@@ -45,5 +45,4 @@ private:
 	LadderWidget* ladderWidget;
 	ConfirmationExitWidget* exitWidget;
 	User user_;
-	QComboBox* box;
 };

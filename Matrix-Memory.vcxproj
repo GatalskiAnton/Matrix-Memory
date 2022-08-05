@@ -85,47 +85,44 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="createAccountWidget.cpp" />
-    <ClCompile Include="myButton.cpp" />
-    <ClCompile Include="user.cpp" />
-    <QtRcc Include="MatrixMemory.qrc" />
-    <QtUic Include="MatrixMemory.ui" />
-    <QtMoc Include="MatrixMemory.h" />
-    <ClCompile Include="confirmationExitWidget.cpp" />
-    <ClCompile Include="gameField.cpp" />
-    <ClCompile Include="ladderWidget.cpp" />
-    <ClCompile Include="loginWidget.cpp" />
-    <ClCompile Include="mainMenu.cpp" />
-    <ClCompile Include="MatrixMemory.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="source\login\createAccountWidget.cpp" />
+    <ClCompile Include="source\game\myButton.cpp" />
+    <ClCompile Include="source\user\user.cpp" />
+    <QtRcc Include="source\stash\MatrixMemory.qrc" />
+    <QtUic Include="source\stash\MatrixMemory.ui" />
+    <QtMoc Include="source\stash\MatrixMemory.h" />
+    <ClCompile Include="source\menu\confirmationExitWidget.cpp" />
+    <ClCompile Include="source\game\gameField.cpp" />
+    <ClCompile Include="source\menu\ladderWidget.cpp" />
+    <ClCompile Include="source\login\loginWidget.cpp" />
+    <ClCompile Include="source\menu\mainMenu.cpp" />
+    <ClCompile Include="source\stash\MatrixMemory.cpp" />
+    <ClCompile Include="source\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="gameField.h" />
+    <QtMoc Include="source\menu\mainMenu.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="mainMenu.h" />
+    <QtMoc Include="source\menu\ladderWidget.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="ladderWidget.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="game_status.txt" />
-    <Text Include="statistics.txt" />
-    <Text Include="users.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="backButtonLadder.png" />
-    <Image Include="backButtonLadderPressed.png" />
-    <Image Include="exitButtonIcon.jpg" />
-    <Image Include="exitButtonIconPressed.jpg" />
-    <Image Include="ladderIcon.png" />
-    <Image Include="ladderIconPressed.png" />
+    <Image Include="img\backButtonLadder.png" />
+    <Image Include="img\backButtonLadderPressed.png" />
+    <Image Include="img\exitButtonIcon.jpg" />
+    <Image Include="img\exitButtonIconPressed.jpg" />
+    <Image Include="img\ladderIcon.png" />
+    <Image Include="img\ladderIconPressed.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="cpp.hint" />
+    <None Include="source\stash\Matrix-Memory.pri" />
+    <None Include="source\stash\Matrix-Memory.pro" />
+    <None Include="styles\buttonStyle.qss" />
     <None Include="styles\exitWidgetStyle.qss" />
+    <None Include="styles\gameFieldStyle.qss" />
     <None Include="styles\leaderbordStyle.qss" />
+    <None Include="styles\loginWidgetStyle.qss" />
     <None Include="styles\mainMenuStyle.qss" />
   </ItemGroup>
   <ItemGroup>
@@ -136,15 +133,21 @@
     <Font Include="fonts\Nautilus.otf" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="confirmationExitWidget.h" />
+    <QtMoc Include="source\menu\confirmationExitWidget.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="loginWidget.h" />
+    <QtMoc Include="source\login\loginWidget.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="createAccountWidget.h" />
-    <QtMoc Include="myButton.h" />
-    <ClInclude Include="user.h" />
+    <QtMoc Include="source\game\myButton.h" />
+    <QtMoc Include="source\game\gameField.h" />
+    <QtMoc Include="source\login\createAccountWidget.h" />
+    <ClInclude Include="source\user\user.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="source\user\userFiles\game_status.txt" />
+    <Text Include="source\user\userFiles\statistics.txt" />
+    <Text Include="source\user\userFiles\users.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

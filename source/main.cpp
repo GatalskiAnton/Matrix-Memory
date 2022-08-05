@@ -1,9 +1,9 @@
 #include "MatrixMemory.h"
 #include "loginWidget.h"
 #include <QtWidgets/QApplication>
-#include "gameField.h"
+#include "game/gameField.h"
 #include "mainMenu.h"
-#include "myButton.h"
+#include "game/myButton.h"
 
 int main(int argc, char *argv[])
 {
