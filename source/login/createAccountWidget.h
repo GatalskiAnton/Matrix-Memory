@@ -7,9 +7,9 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <fstream>
-#include "user.h"
+#include "../user/user.h"
 
-class CreateAccountWidget:public QWidget
+class CreateAccountWidget :public QWidget
 {
 	Q_OBJECT
 public:
@@ -31,4 +31,3 @@ private:
 	QPushButton* createButton;
 	QPushButton* cancelButton;
 };
-

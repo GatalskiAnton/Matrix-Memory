@@ -17,10 +17,12 @@ std::ostream& operator<<(std::ostream& output, const User& user)
 	return output;
 }
 
+
+
 std::list<User> User::getUsers()
 {
 	std::list<User> users;
-	std::ifstream input("files/users.txt");
+	std::ifstream input("source/user/userFiles/users.txt");
 	User user;
 
 	while (input >> user)

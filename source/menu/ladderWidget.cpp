@@ -19,7 +19,7 @@ LadderWidget::LadderWidget(QWidget* parent)
 	backButton->setObjectName("backButton");
 	exitButton->setObjectName("exitButton");
 
-	QPixmap pixmap("exitButtonIcon.jpg");
+	QPixmap pixmap("img/exitButtonIcon.jpg");
 	QIcon buttonIcon(pixmap);
 	exitButton->setIcon(buttonIcon);
 	exitButton->setIconSize(QSize(25, 25));
@@ -30,7 +30,7 @@ LadderWidget::LadderWidget(QWidget* parent)
 	verticalLayout->setSpacing(0);
 	horizontaLayout->addWidget(backButton, 0, Qt::AlignTop | Qt::AlignLeft);
 	horizontaLayout->addWidget(titleLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
-	horizontaLayout->addWidget(exitButton, 0, Qt::AlignTop | Qt::AlignRight);
+	horizontaLayout->addWidget(exitButton, 0, Qt::AlignRight | Qt::AlignTop);
 	verticalLayout->addLayout(horizontaLayout);
 	verticalLayout->addWidget(ladderList, 0);
 	setLayout(verticalLayout);
@@ -55,7 +55,7 @@ void LadderWidget::onClickedBackButton()
 
 void LadderWidget::pressedOnExitButton()
 {
-	QPixmap pixmap("exitButtonIconPressed.jpg");
+	QPixmap pixmap("img/exitButtonIconPressed.jpg");
 	QIcon buttonIcon(pixmap);
 	exitButton->setIcon(buttonIcon);
 	exitButton->setIconSize(QSize(20, 20));
@@ -63,7 +63,7 @@ void LadderWidget::pressedOnExitButton()
 
 void LadderWidget::releasedOnExitButton()
 {
-	QPixmap pixmap("exitButtonIcon.jpg");
+	QPixmap pixmap("img/exitButtonIcon.jpg");
 	QIcon buttonIcon(pixmap);
 	exitButton->setIcon(buttonIcon);
 	exitButton->setIconSize(QSize(25, 25));

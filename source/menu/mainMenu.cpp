@@ -1,4 +1,6 @@
 #include "mainMenu.h"
+#include <QToolButton>
+
 
 MainMenu::MainMenu(const User &user, QWidget* parent = nullptr):user_(user)
 {
@@ -18,17 +20,18 @@ MainMenu::MainMenu(const User &user, QWidget* parent = nullptr):user_(user)
 	exitWidget = new ConfirmationExitWidget(this);
 	exitWidget->hide();
 
-	QMenu* menu = new QMenu(QString::fromStdString(user_.getLogin()), this);
-	QMenuBar* menuBar = new QMenuBar(this);
-	menuBar->setObjectName("menuBar");
-	menuBar->setDefaultUp(true);
+	QMenu* menu = new QMenu("123", this);
+	
+	QToolButton* tb = new QToolButton(this);
+	tb->setMenu(menu);
+	tb->setText(QString::fromStdString((user.getLogin())));
+	tb->setPopupMode(QToolButton::InstantPopup);
 
 	QAction* exitAction = new QAction("Exit",this);
 	QAction* changeAccountAction = new QAction("Change account", this);
 	menu->addAction(exitAction);
 	menu->addAction(changeAccountAction);
-	menuBar->addMenu(menu);
-
+	
 	titleLabel->setObjectName("titleLabel");
 	playButton->setObjectName("playButton");
 	scoreLabel->setObjectName("scoreLabel");
@@ -37,7 +40,7 @@ MainMenu::MainMenu(const User &user, QWidget* parent = nullptr):user_(user)
 	maxTileLabel->setObjectName("maxTileLabel");
 	ladderButton->setObjectName("ladderButton");
 
-	QPixmap pixmap("ladderIcon.png");
+	QPixmap pixmap("img/ladderIcon.png");
 	QIcon buttonIcon(pixmap);
 	ladderButton->setIcon(buttonIcon);
 	ladderButton->setIconSize(QSize(36, 36));
@@ -58,7 +61,7 @@ MainMenu::MainMenu(const User &user, QWidget* parent = nullptr):user_(user)
 	verticalLayout->addSpacing(-20);
 	verticalLayout->addWidget(maxTileLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
 	verticalLayout->addSpacing(50);
-	verticalLayout->addWidget(menuBar, 0, Qt::AlignLeft | Qt::AlignBottom);
+	verticalLayout->addWidget(tb, 0, Qt::AlignLeft | Qt::AlignBottom);
 	verticalLayout->addSpacing(-90);
 	verticalLayout->addWidget(ladderButton, 0, Qt::AlignRight | Qt::AlignBottom);
 	horizontaLayout->addLayout(verticalLayout);
@@ -81,7 +84,7 @@ MainMenu::MainMenu(const User &user, QWidget* parent = nullptr):user_(user)
 
 void MainMenu::onClickedPlayButton()
 {
-	GameField* gameFieldWidget = new GameField(user_,this);
+	GameField* gameFieldWidget = new GameField(this, &user_);
 	close();
 	gameFieldWidget->show();
 	gameFieldWidget->setFixedSize(850, 900);
@@ -110,7 +113,7 @@ void MainMenu::onClickedLadderButton()
 
 void MainMenu::pressedOnLadderButton()
 {
-	QPixmap pixmap("ladderIconPressed.png");
+	QPixmap pixmap("img/ladderIconPressed.png");
 	QIcon buttonIcon(pixmap);
 	ladderButton->setIcon(buttonIcon);
 	ladderButton->setIconSize(QSize(27, 27));
@@ -118,7 +121,7 @@ void MainMenu::pressedOnLadderButton()
 
 void MainMenu::releasedOnLadderButton()
 {
-	QPixmap pixmap("ladderIcon.png");
+	QPixmap pixmap("img/ladderIcon.png");
 	QIcon buttonIcon(pixmap);
 	ladderButton->setIcon(buttonIcon);
 	ladderButton->setIconSize(QSize(36, 36));

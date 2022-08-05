@@ -1,30 +1,26 @@
 #pragma once
 
-#include <QMainWindow>
-#include <QTimer>
 #include <QPushButton>
-#include <QLabel>
-#include <QPainter>
+#include <QTimer>
 #include <QColor>
 #include <QFile>
+#include <QPainter>
 
 class MyButton : public QPushButton
 {
     Q_OBJECT
-
 public:
-    MyButton(int value, QWidget* parent = nullptr);
+    MyButton(QWidget* parent = nullptr,int value = 0);
     ~MyButton() = default;
     void setValue(int value);
     int getValue();
-    void setColor(QColor color);
+    void setColor(const QColor& color);
 protected:
     void paintEvent(QPaintEvent*);
 private:
+    int value;
     QTimer* timer;
-    int value_;
-    QColor color;
-    bool isFirstRepaint;
+    QColor* currentColor;
 private slots:
     void TimerScore();
 };

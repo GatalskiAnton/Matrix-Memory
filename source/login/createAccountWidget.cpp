@@ -69,7 +69,7 @@ void CreateAccountWidget::onClickedCreateButton()
 		}
 	}
 
-	std::ofstream output("files/users.txt",std::ios::app);
+	std::ofstream output("source/user/userFiles/users.txt",std::ios::app);
 	User user(loginEdit->text().toStdString(), passwordEdit->text().toStdString());
 	output << user;
 	output.close();
