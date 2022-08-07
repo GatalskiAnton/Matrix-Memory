@@ -15,11 +15,15 @@ LoginWidget::LoginWidget(QWidget* parent)
 	cancelButton = new QPushButton("Cancel", this);
 
 	wrongPasswordLabel->hide();
-
+	
 	registerButton->setObjectName("registerButton");
+
+	registerButton->setShortcutEnabled(true);
+
 
 	passwordEdit->setEchoMode(QLineEdit::Password);
 	
+
 	QVBoxLayout* loginFieldLayout = new QVBoxLayout(this);
 	QHBoxLayout* mainLayout = new QHBoxLayout(this);
 	QHBoxLayout* buttonLayout = new QHBoxLayout(this);

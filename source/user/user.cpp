@@ -17,8 +17,6 @@ std::ostream& operator<<(std::ostream& output, const User& user)
 	return output;
 }
 
-
-
 std::list<User> User::getUsers()
 {
 	std::list<User> users;
@@ -51,6 +49,16 @@ int User::getMaxTile() const
 	return maxTile_;
 }
 
+int User::getScore() const
+{
+	return score_;
+}
+
+int User::getTiles() const
+{
+	return tiles_;
+}
+
 void User::setRecord(int record) 
 {
 	record_ = record;
@@ -59,4 +67,14 @@ void User::setRecord(int record)
 void User::setMaxTile(int maxTile) 
 {
 	maxTile_ = maxTile;
+}
+
+void User::setScore(int score)
+{
+	score_ = score;
+}
+
+void User::setTiles(int tiles)
+{
+	tiles_ = tiles;
 }

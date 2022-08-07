@@ -16,7 +16,7 @@ public:
     int getValue();
     void setColor(const QColor& color);
 protected:
-    void paintEvent(QPaintEvent*);
+    void paintEvent(QPaintEvent* event);
 private:
     int value;
     QTimer* timer;

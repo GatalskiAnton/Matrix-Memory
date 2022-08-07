@@ -9,6 +9,7 @@
 #include <fstream>
 #include "../user/user.h"
 
+
 class CreateAccountWidget :public QWidget
 {
 	Q_OBJECT

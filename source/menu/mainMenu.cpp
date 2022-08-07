@@ -11,8 +11,8 @@ MainMenu::MainMenu(const User &user, QWidget* parent = nullptr):user_(user)
 
 	titleLabel = new QLabel("Matrix Memory", this);
 	playButton = new QPushButton("PLAY", this);
-	scoreLabel = new QLabel("Score: ", this);
-	tileLabel = new QLabel("Tile: ", this);
+	scoreLabel = new QLabel("Score: " + QString::number(user_.getScore()), this);
+	tileLabel = new QLabel("Tile: " + QString::number(user_.getTiles()), this);
 	recordLabel = new QLabel("Record: " + QString::number(user_.getRecord()),this);
 	maxTileLabel = new QLabel("Max Tile: " + QString::number(user_.getMaxTile()),this);
 	ladderButton = new QPushButton(this);

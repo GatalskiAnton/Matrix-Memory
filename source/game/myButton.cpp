@@ -23,7 +23,7 @@ void MyButton::setColor(const QColor& color)
     currentColor = new QColor(color);
 }
 
-void MyButton::paintEvent(QPaintEvent*)
+void MyButton::paintEvent(QPaintEvent* event)
 {
 	QPainter painter(this);
     painter.setBrush(*currentColor);

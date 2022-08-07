@@ -19,6 +19,7 @@ class GameField : public QWidget
 public:
 	explicit GameField(QWidget* parent = nullptr,
 		User* user = nullptr,
+		int level = 1,
 		int lives = 3,
 		int score = 0,
 		int tiles = 0);
@@ -27,11 +28,12 @@ protected slots:
 	void onClickedBackButton();
 	void onClickedFieldButton();
 private:
-	QWidget* parent;
-	User* user;
-	int lives;
-	int score;
-	int tiles;
+	QWidget* parent_;
+	User* user_;
+	int level_;
+	int lives_;
+	int score_;
+	int tiles_;
 	QPushButton* backButton;
 	QLabel* scoreLabel;
 	QLabel* tilesLabel;

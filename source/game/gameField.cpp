@@ -1,14 +1,19 @@
 #include "gameField.h"
+#include <random>
+#include <vector>
+
 
 GameField::GameField(QWidget* parent,
 	User* user,
+	int level,
 	int lives,
 	int score,
-	int tiles) :parent(parent),
-	lives(lives),
-	score(score),
-	tiles(tiles),
-	user(user)
+	int tiles) :parent_(parent),
+	level_(level),
+	lives_(lives),
+	score_(score),
+	tiles_(tiles),
+	user_(user)
 {
 	srand(time(NULL));
 
@@ -35,14 +40,68 @@ GameField::GameField(QWidget* parent,
 	horizontalLayout->addWidget(livesLabel, 0, Qt::AlignTop | Qt::AlignRight);
 
 	gameLayout->setColumnStretch(0, 1);
-	gameLayout->setColumnStretch(4, 1);
+	gameLayout->setColumnStretch(level_ + 4, 1);
 	gameLayout->setSpacing(0);
-	for (int i = 0; i < 9; ++i)
+	
+	int m = 3;
+	int n = 3;
+
+	QVector<int> buttonsIndex;
+	
+	if (level_ % 2)
 	{
-		MyButton* tempButton = new MyButton(this,rand() % 2);
-		tempButton->setFixedSize(550/3, 550/3);
-		buttons.push_back(tempButton);
-		gameLayout->addWidget(buttons[i], i / 3, i % 3 + 1, Qt::AlignHCenter | Qt::AlignTop);
+		n += level_;
+		m += level_ - 1;
+	}
+	else
+	{
+		m += level_ - 1;
+		n = m;
+	}
+
+	for (int i = 0; i < level_ + 2; i++)
+	{
+		int buttonIndex = rand() % (n * m);
+		for (int j = 0; j < buttonsIndex.length(); j++)
+		{
+			if (buttonsIndex[j] == buttonIndex)
+			{
+				buttonIndex = rand() % (n * m);
+			}
+		}
+
+		buttonsIndex.push_back(buttonIndex);
+	}
+
+	for (int i = 0; i < n*m; i++)
+	{
+		bool thisButton = false;
+		for (int j = 0; j < buttonsIndex.length(); j++)
+		{
+			if (i == buttonsIndex[j])
+			{
+				thisButton = true;
+			}
+		}
+
+		MyButton* tempButton;
+
+		if (thisButton == true)
+		{
+			tempButton = new MyButton(this, 1);
+		}
+		else
+		{
+			 tempButton = new MyButton(this);
+		}
+
+		tempButton->setFixedSize(width() / 6, width() / 6);
+		buttons.push_back(tempButton); 
+	}
+
+	for (int i = 0; i < m*n; ++i)
+	{
+		gameLayout->addWidget(buttons[i], i / n, i % n + 1, Qt::AlignHCenter | Qt::AlignTop);
 		connect(buttons[i], SIGNAL(clicked()), SLOT(onClickedFieldButton()));
 	}
 
@@ -59,7 +118,7 @@ GameField::GameField(QWidget* parent,
 void GameField::onClickedBackButton()
 {
 	close();
-	parent->show();
+	parent_->show();
 }
 
 void GameField::onClickedFieldButton()
@@ -68,8 +127,8 @@ void GameField::onClickedFieldButton()
 
 	if (source->getValue() == 1)
 	{
-		score += 50;
-		++tiles;
+		score_ += 50;
+		++tiles_;
 
 		source->setColor(QColor(48, 208, 112));
 		source->setValue(-1);
@@ -85,7 +144,7 @@ void GameField::onClickedFieldButton()
 		}
 		if (isWin)
 		{
-			GameField* gm = new GameField(parent, user, lives, score, tiles);
+			GameField* gm = new GameField(parent_, user_, ++level_, lives_, score_, tiles_);
 			close();
 			gm->show();
 			gm->setFixedSize(850, 900);
@@ -93,24 +152,26 @@ void GameField::onClickedFieldButton()
 	}
 	else if (source->getValue() == 0)
 	{
-		--lives;
+		--lives_;
 
 		source->setColor(QColor(220, 59, 49));
 		source->setEnabled(false);
 
-		if (lives == 0)
+		if (lives_ == 0)
 		{
+			user_->setScore(score_);
+			user_->setTiles(tiles_);
 			close();
-			parent->show();
+			parent_->show();
 		}
-		else if (score > user->getRecord())
+		else if (score_ > user_->getRecord())
 		{
-			user->setRecord(score);
+			user_->setRecord(score_);
 		}
 	}
 
-	scoreLabel->setText("Score: " + QString::number(score));
-	tilesLabel->setText("Tiles: " + QString::number(tiles));
-	livesLabel->setText("Lives: " + QString::number(lives));
+	scoreLabel->setText("Score: " + QString::number(score_));
+	tilesLabel->setText("Tiles: " + QString::number(tiles_));
+	livesLabel->setText("Lives: " + QString::number(lives_));
 	update();
 }
