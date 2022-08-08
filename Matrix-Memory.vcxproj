@@ -85,9 +85,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="fonts\fontSetter.cpp" />
     <ClCompile Include="source\login\createAccountWidget.cpp" />
     <ClCompile Include="source\game\myButton.cpp" />
     <ClCompile Include="source\user\user.cpp" />
+    <ClCompile Include="styles\styleSetter.cpp" />
     <QtRcc Include="source\stash\MatrixMemory.qrc" />
     <QtUic Include="source\stash\MatrixMemory.ui" />
     <QtMoc Include="source\stash\MatrixMemory.h" />
@@ -118,19 +120,18 @@
     <None Include="cpp.hint" />
     <None Include="source\stash\Matrix-Memory.pri" />
     <None Include="source\stash\Matrix-Memory.pro" />
-    <None Include="styles\buttonStyle.qss" />
-    <None Include="styles\exitWidgetStyle.qss" />
-    <None Include="styles\gameFieldStyle.qss" />
-    <None Include="styles\leaderbordStyle.qss" />
-    <None Include="styles\loginWidgetStyle.qss" />
-    <None Include="styles\mainMenuStyle.qss" />
+    <None Include="styles\styles\exitWidgetStyle.qss" />
+    <None Include="styles\styles\gameFieldStyle.qss" />
+    <None Include="styles\styles\leaderbordStyle.qss" />
+    <None Include="styles\styles\loginWidgetStyle.qss" />
+    <None Include="styles\styles\mainMenuStyle.qss" />
   </ItemGroup>
   <ItemGroup>
-    <Font Include="fonts\Alexander.otf" />
-    <Font Include="fonts\Boomboom.otf" />
-    <Font Include="fonts\d9464-arkhip_font.ttf" />
-    <Font Include="fonts\gnyrwn971.ttf" />
-    <Font Include="fonts\Nautilus.otf" />
+    <Font Include="fonts\fonts\Alexander.otf" />
+    <Font Include="fonts\fonts\Boomboom.otf" />
+    <Font Include="fonts\fonts\d9464-arkhip_font.ttf" />
+    <Font Include="fonts\fonts\gnyrwn971.ttf" />
+    <Font Include="fonts\fonts\Nautilus.otf" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="source\menu\confirmationExitWidget.h" />
@@ -139,9 +140,11 @@
     <QtMoc Include="source\login\loginWidget.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="styles\styleSetter.h" />
     <QtMoc Include="source\game\myButton.h" />
     <QtMoc Include="source\game\gameField.h" />
     <QtMoc Include="source\login\createAccountWidget.h" />
+    <ClInclude Include="fonts\fontSetter.h" />
     <ClInclude Include="source\user\user.h" />
   </ItemGroup>
   <ItemGroup>

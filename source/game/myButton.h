@@ -1,10 +1,11 @@
-#pragma once
+#ifndef MYBUTTON_H
+#define MYBUTTON_H
 
 #include <QPushButton>
 #include <QTimer>
 #include <QColor>
-#include <QFile>
 #include <QPainter>
+#include "../../styles/styleSetter.h"
 
 class MyButton : public QPushButton
 {
@@ -12,15 +13,17 @@ class MyButton : public QPushButton
 public:
     MyButton(QWidget* parent = nullptr,int value = 0);
     ~MyButton() = default;
-    void setValue(int value);
     int getValue();
+    void setValue(int value);
     void setColor(const QColor& color);
 protected:
     void paintEvent(QPaintEvent* event);
+protected slots:
+    void TimerScore();
 private:
     int value;
     QTimer* timer;
     QColor* currentColor;
-private slots:
-    void TimerScore();
 };
+
+#endif

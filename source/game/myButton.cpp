@@ -1,6 +1,5 @@
 #include "myButton.h"
 
-
 MyButton::MyButton(QWidget* parent, int value): QPushButton(parent), value(value)
 {
     currentColor = value == 0 ? new QColor(77, 101, 129) : 
@@ -12,10 +11,16 @@ MyButton::MyButton(QWidget* parent, int value): QPushButton(parent), value(value
     setEnabled(false);
 
     connect(timer, SIGNAL(timeout()), this, SLOT(TimerScore()));
+}
 
-    QFile file("styles/buttonStyle.qss");
-    file.open(QFile::ReadOnly);
-    setStyleSheet(file.readAll());
+int MyButton::getValue()
+{
+    return value;
+}
+
+void MyButton::setValue(int value)
+{
+    this->value = value;
 }
 
 void MyButton::setColor(const QColor& color)
@@ -25,10 +30,10 @@ void MyButton::setColor(const QColor& color)
 
 void MyButton::paintEvent(QPaintEvent* event)
 {
-	QPainter painter(this);
+    QPainter painter(this);
     painter.setBrush(*currentColor);
-    painter.setPen(QColor(109,130,148));
-	painter.drawRect(0, 0, width(), width());
+    painter.setPen(QColor(109, 130, 148));
+    painter.drawRect(0, 0, width(), width());
 }
 
 void MyButton::TimerScore()
@@ -39,14 +44,4 @@ void MyButton::TimerScore()
 
     setEnabled(true);
     update();
-}
-
-void MyButton::setValue(int value)
-{
-    this->value = value;
-}
-
-int MyButton::getValue()
-{
-    return value;
 }

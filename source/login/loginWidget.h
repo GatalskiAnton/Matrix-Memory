@@ -9,6 +9,7 @@
 #include "../menu/mainMenu.h"
 #include "../user/user.h"
 #include "createAccountWidget.h"
+#include "../../styles/styleSetter.h"
 
 class LoginWidget : public QWidget
 {

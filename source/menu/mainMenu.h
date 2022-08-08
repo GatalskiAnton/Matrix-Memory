@@ -3,22 +3,20 @@
 #include <QWidget>
 #include <QLabel>
 #include <QPushButton>
-#include <QFontDatabase>
-#include <QFont>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
-#include <QFile>
 #include <QComboBox>
-#include "ladderWidget.h"
-#include "confirmationExitWidget.h"
-#include "../user/user.h"
 #include <QAction>
 #include <QMenu>
 #include <QMenuBar>
 #include <QAction>
+#include "ladderWidget.h"
+#include "confirmationExitWidget.h"
+#include "../user/user.h"
 #include "../login/loginWidget.h"
 #include "../game/gameField.h"
-
+#include "../../fonts/fontSetter.h"
+#include "../../styles/styleSetter.h"
 
 class MainMenu : public QWidget
 {

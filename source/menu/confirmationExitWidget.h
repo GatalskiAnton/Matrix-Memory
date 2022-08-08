@@ -3,11 +3,10 @@
 #include <QWidget>
 #include <QLabel>
 #include <QPushButton>
-#include <QFontDatabase>
-#include <QFont>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
-#include <QFile>
+#include "../../fonts/fontSetter.h"
+#include "../../styles/styleSetter.h"
 
 class ConfirmationExitWidget:public QWidget
 {

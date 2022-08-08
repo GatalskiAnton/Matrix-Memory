@@ -3,12 +3,11 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
-#include <QFile>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <fstream>
 #include "../user/user.h"
-
+#include "../../styles/styleSetter.h"
 
 class CreateAccountWidget :public QWidget
 {

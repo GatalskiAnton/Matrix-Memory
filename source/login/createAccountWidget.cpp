@@ -37,9 +37,7 @@ CreateAccountWidget::CreateAccountWidget(QWidget* parent)
 	connect(createButton, SIGNAL(clicked()), SLOT(onClickedCreateButton()));
 	connect(cancelButton, SIGNAL(clicked()), SLOT(onClickedCancelButton()));
 
-	QFile file("styles/loginWidgetStyle.qss");
-	file.open(QFile::ReadOnly);
-	setStyleSheet(file.readAll());
+	StyleSetter::setStyle("styles/styles/loginWidgetStyle.qss", this);
 }
 
 void CreateAccountWidget::onClickedCancelButton()

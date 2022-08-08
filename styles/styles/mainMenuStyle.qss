@@ -3,12 +3,7 @@
 	font-size: 25px;
 	color:rgb(255,255,253);
 }
-@font-face {
-font-family: "BoomBoom"; 
-src: url("../fonts/Boomboom.otf") format("truetype"); 
-font-style: normal; 
-font-weight: normal; 
-} 
+
 
 #titleLabel {
 	font-size: 80px;

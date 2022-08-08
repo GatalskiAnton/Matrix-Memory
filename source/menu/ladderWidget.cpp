@@ -2,7 +2,7 @@
 
 LadderWidget::LadderWidget(QWidget* parent)
 {
-	int id = QFontDatabase::addApplicationFont("fonts/Boomboom.otf");
+	int id = QFontDatabase::addApplicationFont("fonts/fonts/Boomboom.otf");
 	QString family = QFontDatabase::applicationFontFamilies(id).at(0);
 	QFont Boomboom(family);
 	setFont(Boomboom);
@@ -42,9 +42,8 @@ LadderWidget::LadderWidget(QWidget* parent)
 	connect(exitButton, SIGNAL(released()), SLOT(releasedOnExitButton()));
 	connect(exitButton, SIGNAL(clicked()), SLOT(onClickedExitButton()));
 
-	QFile file("styles/leaderbordStyle.qss");
-	file.open(QFile::ReadOnly);
-	setStyleSheet(file.readAll());
+	FontSetter::setFont("fonts/fonts/Boomboom.otf", this);
+	StyleSetter::setStyle("styles/styles/leaderbordStyle.qss", this);
 }
 
 void LadderWidget::onClickedBackButton()

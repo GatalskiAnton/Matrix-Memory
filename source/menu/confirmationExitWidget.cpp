@@ -2,11 +2,6 @@
 
 ConfirmationExitWidget::ConfirmationExitWidget(QWidget* parent)
 {
-	int id = QFontDatabase::addApplicationFont("fonts/Boomboom.otf");
-	QString family = QFontDatabase::applicationFontFamilies(id).at(0);
-	QFont Boomboom(family);
-	setFont(Boomboom);
-
 	yesButton = new QPushButton("Yes", this);
 	noButton = new QPushButton("No", this);
 	textLabel = new QLabel("Do you really want to quit?", this);
@@ -25,9 +20,8 @@ ConfirmationExitWidget::ConfirmationExitWidget(QWidget* parent)
 	connect(noButton, SIGNAL(clicked()), SLOT(onClickedNoButton()));
 	connect(yesButton, SIGNAL(clicked()), SLOT(onClickedYesButton()));
 
-	QFile file("styles/exitWidgetStyle.qss");
-	file.open(QFile::ReadOnly);
-	setStyleSheet(file.readAll());
+	FontSetter::setFont("fonts/fonts/Boomboom.otf", this);
+	StyleSetter::setStyle("styles/styles/exitWidgetStyle.qss", this);
 }
 
 void ConfirmationExitWidget::onClickedYesButton()
