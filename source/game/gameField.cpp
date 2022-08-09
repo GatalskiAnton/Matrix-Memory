@@ -109,40 +109,46 @@ void GameField::createTilesLayout(QGridLayout* layout)
 		rows = columns += level - 1;
 	}
 
+	if (level == 0)
+	{
+		rows = 3;
+		columns = 3;
+	}
+
 	createButtons(rows, columns);
 
 	for (int i = 0; i < rows * columns; ++i)
 	{
 		layout->addWidget(buttons[i], i / columns, i % columns + 1, Qt::AlignHCenter | Qt::AlignTop);
-		connect(buttons[i], SIGNAL(clicked()), SLOT(onClickedFieldButton()));
+		connect(buttons[i], SIGNAL(clicked()), SLOT(onClickedTilesFieldButton()));
 	}
 }
 
 void GameField::createButtons(int rows, int columns)
 {
-	QVector<int> buttonsIndeces;
+	QVector<int> buttonsIndex;
 
-	for (int i = 0; i < level + 2; ++i)
+	for (int i = 0; i < level + 3; ++i)
 	{
 		int buttonIndex = rand() % (rows * columns);
 
-		for (int j = 0; j < buttonsIndeces.length(); ++j)
+		for (int j = 0; j < buttonsIndex.length(); ++j)
 		{
-			if (buttonsIndeces[j] == buttonIndex)
+			if (buttonsIndex[j] == buttonIndex)
 			{
 				buttonIndex = rand() % (rows * columns);
 			}
 		}
-		buttonsIndeces.push_back(buttonIndex);
+		buttonsIndex.push_back(buttonIndex);
 	}
 
 	for (int i = 0; i < rows * columns; ++i)
 	{
 		bool thisButton = false;
 
-		for (int j = 0; j < buttonsIndeces.length(); ++j)
+		for (int j = 0; j < buttonsIndex.length(); ++j)
 		{
-			if (i == buttonsIndeces[j])
+			if (i == buttonsIndex[j])
 			{
 				thisButton = true;
 			}

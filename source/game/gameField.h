@@ -19,7 +19,7 @@ class GameField : public QWidget
 public:
 	explicit GameField(QWidget* parent = nullptr,
 		User* user = nullptr,
-		int level = 1,
+		int level = 0,
 		int lives = 3,
 		int score = 0,
 		int tiles = 0);
