@@ -62,3 +62,7 @@ QToolButton {
 	font-family:BoomBoom;	
 	border-radius:15px;
 }
+QToolButton:pressed{
+	font-size: 20px;
+	color:rgba(255,255,253,0.5);
+}

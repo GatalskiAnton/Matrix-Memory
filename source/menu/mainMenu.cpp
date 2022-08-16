@@ -90,7 +90,6 @@ void MainMenu::onClickedChangeAccountButton()
 	loginWidget->show();
 }
 
-
 void MainMenu::onClickedExitButton()
 {
 	exitWidget->show();

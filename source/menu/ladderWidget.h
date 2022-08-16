@@ -16,8 +16,6 @@ public:
 	explicit LadderWidget(QWidget* parent = nullptr);
 	~LadderWidget() = default;
 protected slots:
-	void pressedOnBackButton();
-	void releasedOnBackButton();
 	void onClickedBackButton();
 	void pressedOnExitButton();
 	void releasedOnExitButton();

@@ -1,5 +1,6 @@
 #include "gameField.h"
 
+
 GameField::GameField(QWidget* parent,
 	User* user,
 	int level,
@@ -224,6 +225,18 @@ void GameField::endGame()
 	if (score > user->getRecord())
 	{
 		user->setRecord(score);
+		user->setMaxTile(tiles);
+		std::list<User> users = User::getUsers();
+		std::ofstream output("source/user/userFiles/users.txt");
+		output.clear();
+		for (User user_ : users)
+		{
+			if (user_.getLogin() != user->getLogin())
+			{
+				output << user_;
+			}
+		}
+		output << *user;
 	}
 
 	close();

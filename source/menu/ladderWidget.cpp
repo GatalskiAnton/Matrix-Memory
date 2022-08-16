@@ -1,4 +1,5 @@
 ﻿#include "ladderWidget.h"
+#include "../user/user.h"
 
 LadderWidget::LadderWidget(QWidget* parent)
 {
@@ -6,8 +7,6 @@ LadderWidget::LadderWidget(QWidget* parent)
 	QString family = QFontDatabase::applicationFontFamilies(id).at(0);
 	QFont Boomboom(family);
 	setFont(Boomboom);
-
-	setWindowFlags(Qt::FramelessWindowHint);
 
 	titleLabel = new QLabel("Leaderbord", this);
 	ladderList = new QListWidget(this);
@@ -18,6 +17,11 @@ LadderWidget::LadderWidget(QWidget* parent)
 	ladderList->setObjectName("ladderList");
 	backButton->setObjectName("backButton");
 	exitButton->setObjectName("exitButton");
+
+	for (User& user: User::getUsers())
+	{
+		ladderList->addItem(QString::fromStdString(user.getLogin()) + " " + QString::number(user.getRecord()));
+	}
 
 	QPixmap pixmap("img/exitButtonIcon.jpg");
 	QIcon buttonIcon(pixmap);
@@ -66,16 +70,6 @@ void LadderWidget::releasedOnExitButton()
 	QIcon buttonIcon(pixmap);
 	exitButton->setIcon(buttonIcon);
 	exitButton->setIconSize(QSize(25, 25));
-}
-
-void LadderWidget::pressedOnBackButton()
-{
-	
-}
-
-void LadderWidget::releasedOnBackButton()
-{
-	
 }
 
 void LadderWidget::onClickedExitButton()
