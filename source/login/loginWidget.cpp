@@ -48,9 +48,7 @@ LoginWidget::LoginWidget(QWidget* parent)
 	connect(registrationWidget, &CreateAccountWidget::showLoginWidget, this, &LoginWidget::show);
 
 
-	QFile file("styles/loginWidgetStyle.qss");
-	file.open(QFile::ReadOnly);
-	setStyleSheet(file.readAll());
+	StyleSetter::setStyle("styles/styles/loginWidgetStyle.qss",this);
 }
 
 void LoginWidget::onClickedLoginButton()

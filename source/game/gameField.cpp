@@ -1,6 +1,4 @@
 #include "gameField.h"
-#include <random>
-#include <vector>
 
 
 GameField::GameField(QWidget* parent,
@@ -8,75 +6,148 @@ GameField::GameField(QWidget* parent,
 	int level,
 	int lives,
 	int score,
-	int tiles) :parent_(parent),
-	level_(level),
-	lives_(lives),
-	score_(score),
-	tiles_(tiles),
-	user_(user)
+	int tiles) :parent(parent),
+	level(level),
+	lives(lives),
+	score(score),
+	tiles(tiles),
+	user(user)
 {
 	srand(time(NULL));
+	
+	createObjects();
+	setObjectsNames();
 
-	int id = QFontDatabase::addApplicationFont("fonts/Boomboom.otf");
-	QString family = QFontDatabase::applicationFontFamilies(id).at(0);
-	QFont Boomboom(family);
-	setFont(Boomboom);
+	QVBoxLayout* mainLayout = new QVBoxLayout(this);
+	createMainLayout(mainLayout);
 
+	FontSetter::setFont("fonts/fonts/Boomboom.otf", this);
+	StyleSetter::setStyle("styles/styles/gameFieldStyle.qss", this);
+}
+
+void GameField::onClickedBackButton()
+{
+	close();
+	parent->show();
+}
+
+void GameField::onClickedTilesFieldButton()
+{
+	MyButton* source = (MyButton*)QObject::sender();
+
+	switch (source->getValue())
+	{
+	case 0:
+		onWrongButtonClicked(source);
+		break;
+	case 1:
+		onCorrectButtonClicked(source);
+		break;
+	default:
+		break;
+	}
+
+	updateScore();
+}
+
+void GameField::createObjects()
+{
 	backButton = new QPushButton("Back", this);
 	scoreLabel = new QLabel("Score: " + QString::number(score), this);
 	tilesLabel = new QLabel("Tiles: " + QString::number(tiles), this);
 	livesLabel = new QLabel("Lives: " + QString::number(lives), this);
+}
 
-	QVBoxLayout* verticalLayout = new QVBoxLayout(this);
-	QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
-	QGridLayout* gameLayout = new QGridLayout();
+void GameField::setObjectsNames()
+{
+	backButton->setObjectName("gameFieldButton");
+	scoreLabel->setObjectName("gameFieldLabel");
+	tilesLabel->setObjectName("gameFieldLabel");
+	livesLabel->setObjectName("gameFieldLabel");
+}
 
-	verticalLayout->setAlignment(Qt::AlignTop);
-	verticalLayout->setSpacing(150);
+void GameField::createMainLayout(QVBoxLayout* layout)
+{
+	layout->setAlignment(Qt::AlignTop);
+	layout->setSpacing(150);
 
-	horizontalLayout->addWidget(backButton, 0, Qt::AlignTop | Qt::AlignLeft);
-	horizontalLayout->addWidget(scoreLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
-	horizontalLayout->addWidget(tilesLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
-	horizontalLayout->addWidget(livesLabel, 0, Qt::AlignTop | Qt::AlignRight);
+	QHBoxLayout* topMenuLayout = new QHBoxLayout(this);
+	QGridLayout* tilesLayout = new QGridLayout(this);
 
-	gameLayout->setColumnStretch(0, 1);
-	gameLayout->setColumnStretch(level_ + 4, 1);
-	gameLayout->setSpacing(0);
-	
-	int m = 3;
-	int n = 3;
+	tilesLayout->setColumnStretch(0, 1);
+	tilesLayout->setColumnStretch(level + 4, 1);
+	tilesLayout->setSpacing(0);
 
-	QVector<int> buttonsIndex;
-	
-	if (level_ % 2)
+	createTopMenuLayout(topMenuLayout);
+	createTilesLayout(tilesLayout);
+
+	layout->addLayout(topMenuLayout, 0);
+	layout->addLayout(tilesLayout, 0);
+
+	connect(backButton, SIGNAL(clicked()), SLOT(onClickedBackButton()));
+}
+
+void GameField::createTopMenuLayout(QHBoxLayout* layout)
+{
+	layout->addWidget(backButton, 0, Qt::AlignTop | Qt::AlignLeft);
+	layout->addWidget(scoreLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
+	layout->addWidget(tilesLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
+	layout->addWidget(livesLabel, 0, Qt::AlignTop | Qt::AlignRight);
+}
+
+void GameField::createTilesLayout(QGridLayout* layout)
+{
+	int rows = 3;
+	int columns = 3;
+
+	if (level % 2)
 	{
-		n += level_;
-		m += level_ - 1;
+		rows += level - 1;
+		columns += level;
 	}
 	else
 	{
-		m += level_ - 1;
-		n = m;
+		rows = columns += level - 1;
 	}
 
-	for (int i = 0; i < level_ + 2; i++)
+	if (level == 0)
 	{
-		int buttonIndex = rand() % (n * m);
-		for (int j = 0; j < buttonsIndex.length(); j++)
+		rows = 3;
+		columns = 3;
+	}
+
+	createButtons(rows, columns);
+
+	for (int i = 0; i < rows * columns; ++i)
+	{
+		layout->addWidget(buttons[i], i / columns, i % columns + 1, Qt::AlignHCenter | Qt::AlignTop);
+		connect(buttons[i], SIGNAL(clicked()), SLOT(onClickedTilesFieldButton()));
+	}
+}
+
+void GameField::createButtons(int rows, int columns)
+{
+	QVector<int> buttonsIndex;
+
+	for (int i = 0; i < level + 3; ++i)
+	{
+		int buttonIndex = rand() % (rows * columns);
+
+		for (int j = 0; j < buttonsIndex.length(); ++j)
 		{
 			if (buttonsIndex[j] == buttonIndex)
 			{
-				buttonIndex = rand() % (n * m);
+				buttonIndex = rand() % (rows * columns);
 			}
 		}
-
 		buttonsIndex.push_back(buttonIndex);
 	}
 
-	for (int i = 0; i < n*m; i++)
+	for (int i = 0; i < rows * columns; ++i)
 	{
 		bool thisButton = false;
-		for (int j = 0; j < buttonsIndex.length(); j++)
+
+		for (int j = 0; j < buttonsIndex.length(); ++j)
 		{
 			if (i == buttonsIndex[j])
 			{
@@ -84,94 +155,99 @@ GameField::GameField(QWidget* parent,
 			}
 		}
 
-		MyButton* tempButton;
-
-		if (thisButton == true)
-		{
-			tempButton = new MyButton(this, 1);
-		}
-		else
-		{
-			 tempButton = new MyButton(this);
-		}
-
-		tempButton->setFixedSize(width() / 6, width() / 6);
-		buttons.push_back(tempButton); 
+		addButton(thisButton);
 	}
-
-	for (int i = 0; i < m*n; ++i)
-	{
-		gameLayout->addWidget(buttons[i], i / n, i % n + 1, Qt::AlignHCenter | Qt::AlignTop);
-		connect(buttons[i], SIGNAL(clicked()), SLOT(onClickedFieldButton()));
-	}
-
-	verticalLayout->addLayout(horizontalLayout, 0);
-	verticalLayout->addLayout(gameLayout, 0);
-
-	QFile file("styles/gameFieldStyle.qss");
-	file.open(QFile::ReadOnly);
-	setStyleSheet(file.readAll());
-
-	connect(backButton, SIGNAL(clicked()), SLOT(onClickedBackButton()));
 }
 
-void GameField::onClickedBackButton()
+void GameField::addButton(bool thisButton)
 {
+	MyButton* tempButton = thisButton ? new MyButton(this, 1) : new MyButton(this);
+
+	tempButton->setFixedSize(width() / 6, width() / 6);
+	buttons.push_back(tempButton);
+}
+
+void GameField::onCorrectButtonClicked(MyButton* source)
+{
+	score += 50;
+	++tiles;
+
+	source->setColor(QColor(48, 208, 112));
+	source->setValue(-1);
+
+	tryWin();
+}
+
+void GameField::tryWin() 
+{
+	bool isWin = true;
+	for (int i = 0; i < buttons.size(); ++i)
+	{
+		if (buttons[i]->getValue() == 1)
+		{
+			isWin = false;
+			break;
+		}
+	}
+
+	if (isWin)
+	{
+		createNewLevel();
+	}
+}
+
+void GameField::createNewLevel()
+{
+	GameField* gm = new GameField(parent, user, ++level, lives, score, tiles);
 	close();
-	parent_->show();
+	gm->show();
+	gm->setFixedSize(850, 900);
 }
 
-void GameField::onClickedFieldButton()
+void GameField::onWrongButtonClicked(MyButton* source) 
 {
-	MyButton* source = (MyButton*)QObject::sender();
+	--lives;
 
-	if (source->getValue() == 1)
+	source->setColor(QColor(220, 59, 49));
+	source->setEnabled(false);
+
+	if (lives == 0)
 	{
-		score_ += 50;
-		++tiles_;
+		endGame();
+	}
+}
 
-		source->setColor(QColor(48, 208, 112));
-		source->setValue(-1);
+void GameField::endGame()
+{
+	user->setScore(score);
+	user->setTiles(tiles);
 
-		bool isWin = true;
-		for (int i = 0; i < buttons.size(); ++i)
+	if (score > user->getRecord())
+	{
+		user->setRecord(score);
+		user->setMaxTile(tiles);
+		std::list<User> users = User::getUsers();
+		std::ofstream output("source/user/userFiles/users.txt");
+		output.clear();
+		for (User user_ : users)
 		{
-			if (buttons[i]->getValue() == 1)
+			if (user_.getLogin() != user->getLogin())
 			{
-				isWin = false;
-				break;
+				output << user_;
 			}
 		}
-		if (isWin)
-		{
-			GameField* gm = new GameField(parent_, user_, ++level_, lives_, score_, tiles_);
-			close();
-			gm->show();
-			gm->setFixedSize(850, 900);
-		}
-	}
-	else if (source->getValue() == 0)
-	{
-		--lives_;
-
-		source->setColor(QColor(220, 59, 49));
-		source->setEnabled(false);
-
-		if (lives_ == 0)
-		{
-			user_->setScore(score_);
-			user_->setTiles(tiles_);
-			close();
-			parent_->show();
-		}
-		else if (score_ > user_->getRecord())
-		{
-			user_->setRecord(score_);
-		}
+		output << *user;
 	}
 
-	scoreLabel->setText("Score: " + QString::number(score_));
-	tilesLabel->setText("Tiles: " + QString::number(tiles_));
-	livesLabel->setText("Lives: " + QString::number(lives_));
+	close();
+	parent->show();
+}
+
+void GameField::updateScore()
+{
+	scoreLabel->setText("Score: " + QString::number(score));
+	tilesLabel->setText("Tiles: " + QString::number(tiles));
+	livesLabel->setText("Lives: " + QString::number(lives));
+
 	update();
 }

@@ -1,13 +1,12 @@
 ﻿#include "ladderWidget.h"
+#include "../user/user.h"
 
 LadderWidget::LadderWidget(QWidget* parent)
 {
-	int id = QFontDatabase::addApplicationFont("fonts/Boomboom.otf");
+	int id = QFontDatabase::addApplicationFont("fonts/fonts/Boomboom.otf");
 	QString family = QFontDatabase::applicationFontFamilies(id).at(0);
 	QFont Boomboom(family);
 	setFont(Boomboom);
-
-	setWindowFlags(Qt::FramelessWindowHint);
 
 	titleLabel = new QLabel("Leaderbord", this);
 	ladderList = new QListWidget(this);
@@ -18,6 +17,11 @@ LadderWidget::LadderWidget(QWidget* parent)
 	ladderList->setObjectName("ladderList");
 	backButton->setObjectName("backButton");
 	exitButton->setObjectName("exitButton");
+
+	for (User& user: User::getUsers())
+	{
+		ladderList->addItem(QString::fromStdString(user.getLogin()) + " " + QString::number(user.getRecord()));
+	}
 
 	QPixmap pixmap("img/exitButtonIcon.jpg");
 	QIcon buttonIcon(pixmap);
@@ -42,9 +46,8 @@ LadderWidget::LadderWidget(QWidget* parent)
 	connect(exitButton, SIGNAL(released()), SLOT(releasedOnExitButton()));
 	connect(exitButton, SIGNAL(clicked()), SLOT(onClickedExitButton()));
 
-	QFile file("styles/leaderbordStyle.qss");
-	file.open(QFile::ReadOnly);
-	setStyleSheet(file.readAll());
+	FontSetter::setFont("fonts/fonts/Boomboom.otf", this);
+	StyleSetter::setStyle("styles/styles/leaderbordStyle.qss", this);
 }
 
 void LadderWidget::onClickedBackButton()
@@ -67,16 +70,6 @@ void LadderWidget::releasedOnExitButton()
 	QIcon buttonIcon(pixmap);
 	exitButton->setIcon(buttonIcon);
 	exitButton->setIconSize(QSize(25, 25));
-}
-
-void LadderWidget::pressedOnBackButton()
-{
-	
-}
-
-void LadderWidget::releasedOnBackButton()
-{
-	
 }
 
 void LadderWidget::onClickedExitButton()

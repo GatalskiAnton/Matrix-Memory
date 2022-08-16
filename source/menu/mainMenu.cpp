@@ -4,11 +4,6 @@
 
 MainMenu::MainMenu(const User &user, QWidget* parent = nullptr):user_(user)
 {
-	int id = QFontDatabase::addApplicationFont("fonts/Boomboom.otf");
-	QString family = QFontDatabase::applicationFontFamilies(id).at(0);
-	QFont Boomboom(family);
-	setFont(Boomboom);
-
 	titleLabel = new QLabel("Matrix Memory", this);
 	playButton = new QPushButton("PLAY", this);
 	scoreLabel = new QLabel("Score: " + QString::number(user_.getScore()), this);
@@ -76,11 +71,9 @@ MainMenu::MainMenu(const User &user, QWidget* parent = nullptr):user_(user)
 	connect(ladderWidget, &LadderWidget::showMainMenu, this, &MainMenu::show);
 	connect(exitWidget, &ConfirmationExitWidget::closeMainMenu, this, &MainMenu::close);
 
-	QFile file("styles/mainMenuStyle.qss");
-	file.open(QFile::ReadOnly);
-	setStyleSheet(file.readAll());
+	FontSetter::setFont("fonts/fonts/Boomboom.otf", this);
+	StyleSetter::setStyle("styles/styles/mainMenuStyle.qss", this);
 }
-
 
 void MainMenu::onClickedPlayButton()
 {
@@ -96,7 +89,6 @@ void MainMenu::onClickedChangeAccountButton()
 	close();
 	loginWidget->show();
 }
-
 
 void MainMenu::onClickedExitButton()
 {

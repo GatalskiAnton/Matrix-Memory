@@ -3,12 +3,7 @@
 	font-size: 25px;
 	color:rgb(255,255,253);
 }
-@font-face {
-font-family: "BoomBoom"; 
-src: url("../fonts/Boomboom.otf") format("truetype"); 
-font-style: normal; 
-font-weight: normal; 
-} 
+
 
 #titleLabel {
 	font-size: 80px;
@@ -66,4 +61,8 @@ QToolButton {
 	outline:none;
 	font-family:BoomBoom;	
 	border-radius:15px;
+}
+QToolButton:pressed{
+	font-size: 20px;
+	color:rgba(255,255,253,0.5);
 }
