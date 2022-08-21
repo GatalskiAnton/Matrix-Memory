@@ -26,20 +26,17 @@ public:
 	~MainMenu() = default;
 protected slots :
 	void onClickedPlayButton();
-	void onClickedExitButton();
 	void pressedOnLadderButton();
 	void releasedOnLadderButton();
-	void onClickedLadderButton();
+	void onClickedExitButton();
 	void onClickedChangeAccountButton();
 	void restartGame();
 private:
 	QLabel* titleLabel;
 	QPushButton* playButton;
-	QLabel* scoreLabel;
-	QLabel* tileLabel;
 	QLabel* recordLabel;
 	QLabel* maxTileLabel;
-	QPushButton* ladderButton;
+	QPushButton* exitButton;
 	LadderWidget* ladderWidget;
 	ConfirmationExitWidget* exitWidget;
 	User user_;

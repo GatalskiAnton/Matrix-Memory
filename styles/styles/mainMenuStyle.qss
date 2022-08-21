@@ -57,12 +57,14 @@ QMenuBar{
 QToolButton::menu-indicator { width: 0px; }
 
 QToolButton {
+	height:48px;
+	font-size:30px;
 	border: 1.5px solid  rgb(255,255,253);
 	outline:none;
 	font-family:BoomBoom;	
 	border-radius:15px;
 }
 QToolButton:pressed{
-	font-size: 20px;
+	font-size: 25px;
 	color:rgba(255,255,253,0.5);
 }
