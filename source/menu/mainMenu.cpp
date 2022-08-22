@@ -6,11 +6,9 @@ MainMenu::MainMenu(const User &user, QWidget* parent = nullptr):user_(user)
 {
 	titleLabel = new QLabel("Matrix Memory", this);
 	playButton = new QPushButton("PLAY", this);
-	scoreLabel = new QLabel("Score: " + QString::number(user_.getScore()), this);
-	tileLabel = new QLabel("Tile: " + QString::number(user_.getTiles()), this);
 	recordLabel = new QLabel("Record: " + QString::number(user_.getRecord()),this);
 	maxTileLabel = new QLabel("Max Tile: " + QString::number(user_.getMaxTile()),this);
-	ladderButton = new QPushButton(this);
+	exitButton = new QPushButton(this);
 	ladderWidget = new LadderWidget(this);
 	exitWidget = new ConfirmationExitWidget(this);
 	exitWidget->hide();
@@ -22,23 +20,19 @@ MainMenu::MainMenu(const User &user, QWidget* parent = nullptr):user_(user)
 	tb->setText(QString::fromStdString((user.getLogin())));
 	tb->setPopupMode(QToolButton::InstantPopup);
 
-	QAction* exitAction = new QAction("Exit",this);
 	QAction* changeAccountAction = new QAction("Change account", this);
-	menu->addAction(exitAction);
 	menu->addAction(changeAccountAction);
 	
 	titleLabel->setObjectName("titleLabel");
 	playButton->setObjectName("playButton");
-	scoreLabel->setObjectName("scoreLabel");
-	tileLabel->setObjectName("tileLabel");
 	recordLabel->setObjectName("recordLabel");
 	maxTileLabel->setObjectName("maxTileLabel");
-	ladderButton->setObjectName("ladderButton");
+	exitButton->setObjectName("ladderButton");
 
-	QPixmap pixmap("img/ladderIcon.png");
+	QPixmap pixmap("img/exitButtonIcon.jpg");
 	QIcon buttonIcon(pixmap);
-	ladderButton->setIcon(buttonIcon);
-	ladderButton->setIconSize(QSize(36, 36));
+	exitButton->setIcon(buttonIcon);
+	exitButton->setIconSize(QSize(36, 36));
 
 	QVBoxLayout* verticalLayout = new QVBoxLayout(this);
 	QHBoxLayout* horizontaLayout = new QHBoxLayout(this);
@@ -48,26 +42,23 @@ MainMenu::MainMenu(const User &user, QWidget* parent = nullptr):user_(user)
 	verticalLayout->addSpacing(50);
 	verticalLayout->addWidget(playButton, 0, Qt::AlignTop | Qt::AlignHCenter);
 	verticalLayout->addSpacing(75);
-	verticalLayout->addWidget(scoreLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
 	verticalLayout->addSpacing(-20);
-	verticalLayout->addWidget(tileLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
 	verticalLayout->addSpacing(-20);
 	verticalLayout->addWidget(recordLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
 	verticalLayout->addSpacing(-20);
 	verticalLayout->addWidget(maxTileLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
-	verticalLayout->addSpacing(50);
+	verticalLayout->addSpacing(195);
 	verticalLayout->addWidget(tb, 0, Qt::AlignLeft | Qt::AlignBottom);
-	verticalLayout->addSpacing(-90);
-	verticalLayout->addWidget(ladderButton, 0, Qt::AlignRight | Qt::AlignBottom);
+	verticalLayout->addSpacing(-108);
+	verticalLayout->addWidget(exitButton, 0, Qt::AlignRight | Qt::AlignBottom);
 	horizontaLayout->addLayout(verticalLayout);
 
 	connect(playButton, SIGNAL(clicked()), SLOT(onClickedPlayButton()));
-	connect(exitAction, SIGNAL(triggered()), SLOT(onClickedExitButton()));
 	connect(changeAccountAction, SIGNAL(triggered()), SLOT(onClickedChangeAccountButton()));
 
-	connect(ladderButton, SIGNAL(pressed()), SLOT(pressedOnLadderButton()));
-	connect(ladderButton, SIGNAL(released()), SLOT(releasedOnLadderButton()));
-	connect(ladderButton, SIGNAL(clicked()), SLOT(onClickedLadderButton()));
+	connect(exitButton, SIGNAL(pressed()), SLOT(pressedOnLadderButton()));
+	connect(exitButton, SIGNAL(released()), SLOT(releasedOnLadderButton()));
+	connect(exitButton, SIGNAL(clicked()), SLOT(onClickedExitButton()));
 	connect(ladderWidget, &LadderWidget::showMainMenu, this, &MainMenu::show);
 	connect(exitWidget, &ConfirmationExitWidget::closeMainMenu, this, &MainMenu::close);
 
@@ -96,27 +87,20 @@ void MainMenu::onClickedExitButton()
 	exitWidget->resize(350, 250);
 }
 
-void MainMenu::onClickedLadderButton()
-{
-	ladderWidget->show();
-	ladderWidget->resize(500, 500);
-	close();
-}
-
 void MainMenu::pressedOnLadderButton()
 {
-	QPixmap pixmap("img/ladderIconPressed.png");
+	QPixmap pixmap("img/exitButtonIconPressed.jpg");
 	QIcon buttonIcon(pixmap);
-	ladderButton->setIcon(buttonIcon);
-	ladderButton->setIconSize(QSize(27, 27));
+	exitButton->setIcon(buttonIcon);
+	exitButton->setIconSize(QSize(27, 27));
 }
 
 void MainMenu::releasedOnLadderButton()
 {
-	QPixmap pixmap("img/ladderIcon.png");
+	QPixmap pixmap("img/exitButtonIcon.jpg");
 	QIcon buttonIcon(pixmap);
-	ladderButton->setIcon(buttonIcon);
-	ladderButton->setIconSize(QSize(36, 36));
+	exitButton->setIcon(buttonIcon);
+	exitButton->setIconSize(QSize(36, 36));
 }
 
 void MainMenu::restartGame()

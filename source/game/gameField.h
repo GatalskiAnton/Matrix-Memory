@@ -41,6 +41,7 @@ private:
 	void onWrongButtonClicked(MyButton* source);
 	void endGame();
 	void updateScore();
+	void updateRecord();
 	QWidget* parent;
 	User* user;
 	int level;
@@ -53,5 +54,7 @@ private:
 	QLabel* livesLabel;
 	QVector<MyButton*> buttons;
 };
+
+
 
 #endif

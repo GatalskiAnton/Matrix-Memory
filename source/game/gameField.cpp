@@ -27,6 +27,7 @@ GameField::GameField(QWidget* parent,
 
 void GameField::onClickedBackButton()
 {
+	updateRecord();
 	close();
 	parent->show();
 }
@@ -222,6 +223,23 @@ void GameField::endGame()
 	user->setScore(score);
 	user->setTiles(tiles);
 
+	updateRecord();
+
+	close();
+	parent->show();
+}
+
+void GameField::updateScore()
+{
+	scoreLabel->setText("Score: " + QString::number(score));
+	tilesLabel->setText("Tiles: " + QString::number(tiles));
+	livesLabel->setText("Lives: " + QString::number(lives));
+
+	update();
+}
+
+void GameField::updateRecord()
+{
 	if (score > user->getRecord())
 	{
 		user->setRecord(score);
@@ -238,16 +256,4 @@ void GameField::endGame()
 		}
 		output << *user;
 	}
-
-	close();
-	parent->show();
-}
-
-void GameField::updateScore()
-{
-	scoreLabel->setText("Score: " + QString::number(score));
-	tilesLabel->setText("Tiles: " + QString::number(tiles));
-	livesLabel->setText("Lives: " + QString::number(lives));
-
-	update();
 }
