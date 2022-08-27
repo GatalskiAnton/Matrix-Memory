@@ -1,4 +1,6 @@
-#pragma once
+#ifndef CREATEACCOUNTWIDGET_H
+#define CREATEACCOUNTWIDGET_H
+
 #include <QWidget>
 #include <QLabel>
 #include <QLineEdit>
@@ -16,18 +18,27 @@ public:
 	explicit CreateAccountWidget(QWidget* parent = nullptr);
 	~CreateAccountWidget() = default;
 protected slots:
+	void onClickedCreateAccountButton();
 	void onClickedCancelButton();
-	void onClickedCreateButton();
-signals:
-	void showLoginWidget();
 private:
+	void createObjects();
+	void setObjectNames();
+	void createMainLayout(QHBoxLayout* layout);
+	void createLoginFieldLayout(QVBoxLayout* layout);
+	void createButtonLayout(QHBoxLayout* layout);
+	bool checkPasswords();
+	bool checkUsers();
+	void createUser();
+	QWidget* parent;
 	QLabel* loginLabel;
-	QLabel* passwordLabel;
-	QLabel* confirmPasswordLabel;
 	QLineEdit* loginEdit;
+	QLabel* passwordLabel;
 	QLineEdit* passwordEdit;
+	QLabel* confirmPasswordLabel;
 	QLineEdit* confirmPasswordEdit;
 	QLabel* wrongPasswordLabel;
-	QPushButton* createButton;
+	QPushButton* createAccountButton;
 	QPushButton* cancelButton;
 };
+
+#endif

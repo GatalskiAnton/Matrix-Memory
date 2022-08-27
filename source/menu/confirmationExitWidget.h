@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CONFIRMATIONEXITWIDGET_H
+#define CONFIRMATIONEXITWIDGET_H
 
 #include <QWidget>
 #include <QLabel>
@@ -20,7 +21,14 @@ protected slots:
 signals:
 	void closeMainMenu();
 private:
+	void createObjects();
+	void setObjectNames();
+	void createMainLayout(QVBoxLayout* layout);
+	void createContentLayout(QHBoxLayout* layout);
+	QWidget* parent;
 	QLabel* textLabel;
 	QPushButton* yesButton;
 	QPushButton* noButton;
 };
+
+#endif

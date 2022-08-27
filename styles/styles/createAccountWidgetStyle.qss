@@ -1,0 +1,24 @@
+* {
+	background-color:rgb(3,38,66);
+	color:rgb(255,255,253);
+}
+#createAccountEdit {
+	border: 1.5px solid rgb(255,255,253);
+	border-radius:5px;
+}
+#wrongPasswordLabel {
+	font-size 10px;
+	color:red;
+	text-decoration: underline;
+}
+#createAccountButton {
+	width:102px;
+	height:25px;
+	border: 1.5px solid rgb(255,255,253);
+	border-radius:5px;
+	font-size:15px;
+}
+#createAccountButton:pressed {
+	font-size:12px;
+	color:rgba(255,255,253,0.5);
+}

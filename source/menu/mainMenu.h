@@ -10,7 +10,6 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QAction>
-#include "ladderWidget.h"
 #include "confirmationExitWidget.h"
 #include "../user/user.h"
 #include "../login/loginWidget.h"
@@ -37,7 +36,6 @@ private:
 	QLabel* recordLabel;
 	QLabel* maxTileLabel;
 	QPushButton* exitButton;
-	LadderWidget* ladderWidget;
 	ConfirmationExitWidget* exitWidget;
 	User user_;
 };

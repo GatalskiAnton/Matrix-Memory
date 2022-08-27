@@ -2,7 +2,6 @@
 	background-color:rgb(3,38,66);
 	color:rgb(255,255,253);
 }
-
 QPushButton {
 	width:150px;
 	height:50px;
