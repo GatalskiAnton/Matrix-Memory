@@ -10,10 +10,10 @@ MyButton::MyButton(QWidget* parent, int value): QPushButton(parent), value(value
 
     setEnabled(false);
 
-    connect(timer, SIGNAL(timeout()), this, SLOT(TimerScore()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(resetColor()));
 }
 
-int MyButton::getValue()
+int MyButton::getValue() const
 {
     return value;
 }
@@ -23,9 +23,9 @@ void MyButton::setValue(int value)
     this->value = value;
 }
 
-void MyButton::setColor(const QColor& color)
+void MyButton::setColor(const QColor* color)
 {
-    currentColor = new QColor(color);
+    currentColor = new QColor(*color);
 }
 
 void MyButton::paintEvent(QPaintEvent* event)
@@ -36,7 +36,7 @@ void MyButton::paintEvent(QPaintEvent* event)
     painter.drawRect(0, 0, width(), width());
 }
 
-void MyButton::TimerScore()
+void MyButton::resetColor()
 {
     currentColor = new QColor(77, 101, 129);
 

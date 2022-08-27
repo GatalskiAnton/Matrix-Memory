@@ -9,7 +9,6 @@ MainMenu::MainMenu(const User &user, QWidget* parent = nullptr):user_(user)
 	recordLabel = new QLabel("Record: " + QString::number(user_.getRecord()),this);
 	maxTileLabel = new QLabel("Max Tile: " + QString::number(user_.getMaxTile()),this);
 	exitButton = new QPushButton(this);
-	ladderWidget = new LadderWidget(this);
 	exitWidget = new ConfirmationExitWidget(this);
 	exitWidget->hide();
 
@@ -59,7 +58,6 @@ MainMenu::MainMenu(const User &user, QWidget* parent = nullptr):user_(user)
 	connect(exitButton, SIGNAL(pressed()), SLOT(pressedOnLadderButton()));
 	connect(exitButton, SIGNAL(released()), SLOT(releasedOnLadderButton()));
 	connect(exitButton, SIGNAL(clicked()), SLOT(onClickedExitButton()));
-	connect(ladderWidget, &LadderWidget::showMainMenu, this, &MainMenu::show);
 	connect(exitWidget, &ConfirmationExitWidget::closeMainMenu, this, &MainMenu::close);
 
 	FontSetter::setFont("fonts/fonts/Boomboom.otf", this);

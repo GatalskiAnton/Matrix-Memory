@@ -11,9 +11,3 @@
 	font-size:20px;
 	color:rgba(255,255,253,0.5);
 }
-@font-face {
-	font-family: "BoomBoom"; 
-	src: url("../fonts/Boomboom.otf") format("truetype"); 
-	font-style: normal; 
-	font-weight: normal; 
-} 

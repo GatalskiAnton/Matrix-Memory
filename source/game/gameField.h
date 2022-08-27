@@ -55,6 +55,4 @@ private:
 	QVector<MyButton*> buttons;
 };
 
-
-
 #endif

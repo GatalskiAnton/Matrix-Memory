@@ -2,28 +2,28 @@
 #define MYBUTTON_H
 
 #include <QPushButton>
+#include <QWidget>
 #include <QTimer>
 #include <QColor>
 #include <QPainter>
-#include "../../styles/styleSetter.h"
 
 class MyButton : public QPushButton
 {
-    Q_OBJECT
+	Q_OBJECT
 public:
-    MyButton(QWidget* parent = nullptr,int value = 0);
-    ~MyButton() = default;
-    int getValue();
-    void setValue(int value);
-    void setColor(const QColor& color);
+	MyButton(QWidget* parent = nullptr, int value = 0);
+	~MyButton() = default;
+	int getValue() const;
+	void setValue(int value);
+	void setColor(const QColor* color);
 protected:
-    void paintEvent(QPaintEvent* event);
+	void paintEvent(QPaintEvent* event);
 protected slots:
-    void TimerScore();
+	void resetColor();
 private:
-    int value;
-    QTimer* timer;
-    QColor* currentColor;
+	int value;
+	QTimer* timer;
+	QColor* currentColor;
 };
 
 #endif

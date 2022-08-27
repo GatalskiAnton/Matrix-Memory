@@ -28,8 +28,15 @@ GameField::GameField(QWidget* parent,
 void GameField::onClickedBackButton()
 {
 	updateRecord();
-	close();
-	parent->show();
+
+	if (close()) 
+	{
+		parent->show();
+	}
+	else
+	{
+		throw std::exception("can't close window");
+	}
 }
 
 void GameField::onClickedTilesFieldButton()
@@ -101,7 +108,12 @@ void GameField::createTilesLayout(QGridLayout* layout)
 	int rows = 3;
 	int columns = 3;
 
-	if (level % 2)
+	if (level == 0)
+	{
+		rows = 3;
+		columns = 3;
+	}
+	else if (level % 2)
 	{
 		rows += level - 1;
 		columns += level;
@@ -111,16 +123,11 @@ void GameField::createTilesLayout(QGridLayout* layout)
 		rows = columns += level - 1;
 	}
 
-	if (level == 0)
-	{
-		rows = 3;
-		columns = 3;
-	}
-
 	createButtons(rows, columns);
 
 	for (int i = 0; i < rows * columns; ++i)
 	{
+		buttons[i]->setFixedSize(rows*100/columns, rows * 100 / columns);
 		layout->addWidget(buttons[i], i / columns, i % columns + 1, Qt::AlignHCenter | Qt::AlignTop);
 		connect(buttons[i], SIGNAL(clicked()), SLOT(onClickedTilesFieldButton()));
 	}
@@ -143,7 +150,6 @@ void GameField::createButtons(int rows, int columns)
 		}
 		buttonsIndex.push_back(buttonIndex);
 	}
-
 	for (int i = 0; i < rows * columns; ++i)
 	{
 		bool thisButton = false;
@@ -155,7 +161,6 @@ void GameField::createButtons(int rows, int columns)
 				thisButton = true;
 			}
 		}
-
 		addButton(thisButton);
 	}
 }
@@ -173,7 +178,7 @@ void GameField::onCorrectButtonClicked(MyButton* source)
 	score += 50;
 	++tiles;
 
-	source->setColor(QColor(48, 208, 112));
+	source->setColor(new QColor(48, 208, 112));
 	source->setValue(-1);
 
 	tryWin();
@@ -182,11 +187,13 @@ void GameField::onCorrectButtonClicked(MyButton* source)
 void GameField::tryWin() 
 {
 	bool isWin = true;
+	
 	for (int i = 0; i < buttons.size(); ++i)
 	{
 		if (buttons[i]->getValue() == 1)
 		{
 			isWin = false;
+
 			break;
 		}
 	}
@@ -200,16 +207,23 @@ void GameField::tryWin()
 void GameField::createNewLevel()
 {
 	GameField* gm = new GameField(parent, user, ++level, lives, score, tiles);
-	close();
-	gm->show();
-	gm->setFixedSize(850, 900);
+
+	if (close())
+	{
+		gm->show();
+		gm->setFixedSize(850, 900);
+	}
+	else
+	{
+		throw std::exception("can't close window");
+	}
 }
 
 void GameField::onWrongButtonClicked(MyButton* source) 
 {
 	--lives;
 
-	source->setColor(QColor(220, 59, 49));
+	source->setColor(new QColor(220, 59, 49));
 	source->setEnabled(false);
 
 	if (lives == 0)
@@ -225,8 +239,14 @@ void GameField::endGame()
 
 	updateRecord();
 
-	close();
-	parent->show();
+	if (close())
+	{
+		parent->show();
+	}
+	else
+	{
+		throw std::exception("can't close window");
+	}
 }
 
 void GameField::updateScore()
@@ -244,16 +264,20 @@ void GameField::updateRecord()
 	{
 		user->setRecord(score);
 		user->setMaxTile(tiles);
+
 		std::list<User> users = User::getUsers();
 		std::ofstream output("source/user/userFiles/users.txt");
+
 		output.clear();
-		for (User user_ : users)
+
+		for (User user : users)
 		{
-			if (user_.getLogin() != user->getLogin())
+			if (user.getLogin() != this->user->getLogin())
 			{
-				output << user_;
+				output << user;
 			}
 		}
+
 		output << *user;
 	}
 }
