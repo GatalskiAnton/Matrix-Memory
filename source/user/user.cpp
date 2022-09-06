@@ -1,21 +1,16 @@
 #include "user.h"
 
-std::istream& operator>>(std::istream& input, User& user)
-{
-	std::string login;
-	std::string password;
-	int record;
-	int maxTile;
-	input >> login >> password >> record >> maxTile;
-	user = User(login,password, record, maxTile);
-	return input;
-}
-
-std::ostream& operator<<(std::ostream& output, const User& user)
-{
-	output << user.getLogin() << " " << user.getPassword() << " " << user.getRecord() << " " << user.getMaxTile() << '\n';
-	return output;
-}
+User::User(std::string const& login,
+	std::string const& password,
+	int record,
+	int maxTile,
+	int score,
+	int tiles) :login(login),
+	password(password),
+	record(record),
+	maxTile(maxTile),
+	score(score),
+	tiles(tiles) {}
 
 std::list<User> User::getUsers()
 {
@@ -31,50 +26,67 @@ std::list<User> User::getUsers()
 
 std::string User::getLogin() const
 {
-	return login_;
+	return login;
 }
 
 std::string User::getPassword() const
 {
-	return password_;
+	return password;
 }
 
 int User::getRecord() const
 {
-	return record_;
+	return record;
 }
 
 int User::getMaxTile() const
 {
-	return maxTile_;
+	return maxTile;
 }
 
 int User::getScore() const
 {
-	return score_;
+	return score;
 }
 
 int User::getTiles() const
 {
-	return tiles_;
+	return tiles;
 }
 
 void User::setRecord(int record) 
 {
-	record_ = record;
+	this->record = record;
 }
 
 void User::setMaxTile(int maxTile) 
 {
-	maxTile_ = maxTile;
+	this->maxTile = maxTile;
 }
 
 void User::setScore(int score)
 {
-	score_ = score;
+	this->score = score;
 }
 
 void User::setTiles(int tiles)
 {
-	tiles_ = tiles;
+	this->tiles = tiles;
+}
+
+std::istream& operator>>(std::istream& input, User& user)
+{
+	std::string login;
+	std::string password;
+	int record;
+	int maxTile;
+	input >> login >> password >> record >> maxTile;
+	user = User(login, password, record, maxTile);
+	return input;
+}
+
+std::ostream& operator<<(std::ostream& output, const User& user)
+{
+	output << user.getLogin() << " " << user.getPassword() << " " << user.getRecord() << " " << user.getMaxTile() << '\n';
+	return output;
 }

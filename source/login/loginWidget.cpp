@@ -111,7 +111,7 @@ void LoginWidget::checkUser(const std::list<User>& users)
 {
 	bool isIncorrectUser = true;
 
-	for (const User& user : users)
+	for (User user : users)
 	{
 		if (loginEdit->text() == QString::fromStdString(user.getLogin()) && passwordEdit->text() == QString::fromStdString(user.getPassword()))
 		{
@@ -119,7 +119,7 @@ void LoginWidget::checkUser(const std::list<User>& users)
 
 			if (close())
 			{
-				MainMenu* menu = new MainMenu(user, this);
+				MainMenu* menu = new MainMenu(&user, this);
 				menu->show();
 				menu->resize(750, 900);
 				menu->move(width(), height() / 2);

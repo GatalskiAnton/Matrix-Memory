@@ -1,4 +1,5 @@
-#pragma once
+#ifndef USER_H
+#define USER_H
 
 #include <string>
 #include <list>
@@ -8,7 +9,7 @@ class User
 {
 public:
 	User() = default;
-	User(std::string const& login, std::string const& password, int  record = 0, int maxTile = 0, int score = 0 , int tiles = 0) :login_(login), password_(password), record_(record), maxTile_(maxTile),score_(score),tiles_(tiles) {};
+	User(std::string const& login, std::string const& password, int  record = 0, int maxTile = 0, int score = 0, int tiles = 0);
 	~User() = default;
 	static std::list<User> getUsers();
 	std::string getLogin() const;
@@ -22,13 +23,15 @@ public:
 	void setScore(int score);
 	void setTiles(int tiles);
 private:
-	std::string login_;
-	std::string password_;
-	int record_;
-	int maxTile_;
-	int score_;
-	int tiles_;
+	std::string login;
+	std::string password;
+	int record;
+	int maxTile;
+	int score;
+	int tiles;
 };
 
 std::istream& operator>>(std::istream&, User&);
 std::ostream& operator<<(std::ostream&, const User&);
+
+#endif

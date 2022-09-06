@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MAINMENU_H
+#define MAINMENU_H
 
 #include <QWidget>
 #include <QLabel>
@@ -21,21 +22,29 @@ class MainMenu : public QWidget
 {
 	Q_OBJECT
 public:
-	explicit MainMenu(const User &, QWidget* );
+public:
+	explicit MainMenu(User* user, QWidget* parent );
 	~MainMenu() = default;
 protected slots :
 	void onClickedPlayButton();
-	void pressedOnLadderButton();
-	void releasedOnLadderButton();
 	void onClickedExitButton();
+	void pressedOnExitButton();
+	void releasedExitButton();
 	void onClickedChangeAccountButton();
-	void restartGame();
 private:
+	void createObjects();
+	void setObjectNames();
+	void createMainLayout(QHBoxLayout* layout);
+	void createSubLayout(QVBoxLayout* layout);
 	QLabel* titleLabel;
 	QPushButton* playButton;
 	QLabel* recordLabel;
 	QLabel* maxTileLabel;
+	QToolButton* loginMenuButton;
+	QMenu* loginMenu;
+	QAction* changeAccountAction;
 	QPushButton* exitButton;
-	ConfirmationExitWidget* exitWidget;
-	User user_;
+	User* user;
 };
+
+#endif
