@@ -127,6 +127,13 @@ bool CreateAccountWidget::checkUsers()
 {
 	std::list<User> users = User::getUsers();
 
+	if (loginEdit->text().isEmpty() || passwordEdit->text().isEmpty() || confirmPasswordEdit->text().isEmpty())
+	{
+		wrongPasswordLabel->setText("all fields must be filled");
+		wrongPasswordLabel->show();
+		return false;
+	}
+
 	for (const User& user : users)
 	{
 		if (user.getLogin() == loginEdit->text().toStdString())

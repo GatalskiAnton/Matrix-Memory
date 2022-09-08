@@ -122,7 +122,8 @@ void LoginWidget::checkUser(const std::list<User>& users)
 				MainMenu* menu = new MainMenu(user, this);
 				menu->show();
 				menu->resize(750, 900);
-				menu->move(width(), height() / 2);
+				menu->move(1920 / 2 - menu->width() / 2, 1080 / 2 - menu->height() / 2);
+
 			}
 			else
 			{

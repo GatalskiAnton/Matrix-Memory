@@ -70,6 +70,7 @@ void MainMenu::onClickedPlayButton()
 	close();
 	gameFieldWidget->show();
 	gameFieldWidget->setFixedSize(850, 900);
+	gameFieldWidget->move(1920 / 2 - width() / 2, 1080 / 2 - height() / 2);
 }
 
 void MainMenu::onClickedChangeAccountButton()

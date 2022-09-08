@@ -207,6 +207,7 @@ void GameField::tryWin()
 void GameField::createNewLevel()
 {
 	GameField* gm = new GameField(parent, user, ++level, lives, score, tiles);
+	gm->move(1920 / 2 - width() / 2, 1080 / 2 - height() / 2);
 
 	if (close())
 	{
