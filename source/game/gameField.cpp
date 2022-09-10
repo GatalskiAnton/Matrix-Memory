@@ -77,7 +77,6 @@ void GameField::setObjectsNames()
 void GameField::createMainLayout(QVBoxLayout* layout)
 {
 	layout->setAlignment(Qt::AlignTop);
-	layout->setSpacing(150);
 
 	QHBoxLayout* topMenuLayout = new QHBoxLayout(this);
 	QGridLayout* tilesLayout = new QGridLayout(this);
@@ -88,6 +87,7 @@ void GameField::createMainLayout(QVBoxLayout* layout)
 
 	createTopMenuLayout(topMenuLayout);
 	createTilesLayout(tilesLayout);
+
 
 	layout->addLayout(topMenuLayout, 0);
 	layout->addLayout(tilesLayout, 0);
@@ -125,9 +125,11 @@ void GameField::createTilesLayout(QGridLayout* layout)
 
 	createButtons(rows, columns);
 
+	layout->setMargin(150);
+
 	for (int i = 0; i < rows * columns; ++i)
 	{
-		buttons[i]->setFixedSize(rows*100/columns, rows * 100 / columns);
+		buttons[i]->setFixedSize(85, 85);
 		layout->addWidget(buttons[i], i / columns, i % columns + 1, Qt::AlignHCenter | Qt::AlignTop);
 		connect(buttons[i], SIGNAL(clicked()), SLOT(onClickedTilesFieldButton()));
 	}
