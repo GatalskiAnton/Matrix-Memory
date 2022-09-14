@@ -6,8 +6,10 @@ MainMenu::MainMenu(const User &user, QWidget* parent = nullptr):user_(user)
 {
 	titleLabel = new QLabel("Matrix Memory", this);
 	playButton = new QPushButton("PLAY", this);
-	recordLabel = new QLabel("Record: " + QString::number(user_.getRecord()),this);
-	maxTileLabel = new QLabel("Max Tile: " + QString::number(user_.getMaxTile()),this);
+	scoreLabel = new QLabel(this);
+	tileLabel = new QLabel(this);
+	recordLabel = new QLabel(this);
+	maxTileLabel = new QLabel(this);
 	exitButton = new QPushButton(this);
 	exitWidget = new ConfirmationExitWidget(this);
 	exitWidget->hide();
@@ -42,13 +44,16 @@ MainMenu::MainMenu(const User &user, QWidget* parent = nullptr):user_(user)
 	verticalLayout->addWidget(playButton, 0, Qt::AlignTop | Qt::AlignHCenter);
 	verticalLayout->addSpacing(75);
 	verticalLayout->addSpacing(-20);
-	verticalLayout->addSpacing(-20);
+	verticalLayout->addWidget(scoreLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
+	verticalLayout->addSpacing(-10);
+	verticalLayout->addWidget(tileLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
+	verticalLayout->addSpacing(-10);
 	verticalLayout->addWidget(recordLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
-	verticalLayout->addSpacing(-20);
+	verticalLayout->addSpacing(-10);
 	verticalLayout->addWidget(maxTileLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
 	verticalLayout->addSpacing(195);
 	verticalLayout->addWidget(tb, 0, Qt::AlignLeft | Qt::AlignBottom);
-	verticalLayout->addSpacing(-108);
+	verticalLayout->addSpacing(-68);
 	verticalLayout->addWidget(exitButton, 0, Qt::AlignRight | Qt::AlignBottom);
 	horizontaLayout->addLayout(verticalLayout);
 
@@ -64,6 +69,14 @@ MainMenu::MainMenu(const User &user, QWidget* parent = nullptr):user_(user)
 	StyleSetter::setStyle("styles/styles/mainMenuStyle.qss", this);
 }
 
+void MainMenu::paintEvent(QPaintEvent* event)
+{
+	scoreLabel->setText("Score: " + QString::number(user_.getScore()));
+	tileLabel->setText("Tiles: " + QString::number(user_.getTiles()));
+	recordLabel->setText("Record: " + QString::number(user_.getRecord()));
+	maxTileLabel->setText("Max Tiles: " + QString::number(user_.getMaxTile()));
+
+}
 void MainMenu::onClickedPlayButton()
 {
 	GameField* gameFieldWidget = new GameField(this, &user_);

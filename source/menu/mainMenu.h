@@ -23,6 +23,8 @@ class MainMenu : public QWidget
 public:
 	explicit MainMenu(const User &, QWidget* );
 	~MainMenu() = default;
+protected:
+	void paintEvent(QPaintEvent* event);
 protected slots :
 	void onClickedPlayButton();
 	void pressedOnLadderButton();
@@ -35,6 +37,8 @@ private:
 	QPushButton* playButton;
 	QLabel* recordLabel;
 	QLabel* maxTileLabel;
+	QLabel* scoreLabel;
+	QLabel* tileLabel;
 	QPushButton* exitButton;
 	ConfirmationExitWidget* exitWidget;
 	User user_;

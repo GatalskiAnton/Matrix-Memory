@@ -1,0 +1,7 @@
+﻿  moc source\menu\mainMenu.h
+  loginWidget.cpp
+  main.cpp
+  mainMenu.cpp
+  moc_loginWidget.cpp
+  moc_mainMenu.cpp
+  Matrix-Memory.vcxproj -> C:\Users\ag629\source\repos\Matrix-Memory\Matrix-Memory\x64\Release\Matrix-Memory.exe

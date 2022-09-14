@@ -27,6 +27,9 @@ GameField::GameField(QWidget* parent,
 
 void GameField::onClickedBackButton()
 {
+	user->setScore(score);
+	user->setTiles(tiles);
+
 	updateRecord();
 
 	if (close()) 
