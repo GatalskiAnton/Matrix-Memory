@@ -1,8 +1,81 @@
 #include "mainMenu.h"
-#include <QToolButton>
 
+MainMenu::MainMenu(const User& user, QWidget* parent = nullptr) :user(user)
+{
+	createObjects();
+	setObjectNames();
 
-MainMenu::MainMenu(const User &user, QWidget* parent = nullptr):user_(user)
+	QHBoxLayout* mainLayout = new QHBoxLayout(this);
+	createMainlayout(mainLayout);
+}
+
+void MainMenu::paintEvent(QPaintEvent* event)
+{
+	scoreLabel->setText("Score: " + QString::number(user.getScore()));
+	tileLabel->setText("Tiles: " + QString::number(user.getTiles()));
+	recordLabel->setText("Record: " + QString::number(user.getRecord()));
+	maxTileLabel->setText("Max Tiles: " + QString::number(user.getMaxTile()));
+}
+void MainMenu::onClickedPlayButton()
+{
+	GameField* gameFieldWidget = new GameField(this, &user);
+	if (close())
+	{
+		gameFieldWidget->show();
+		gameFieldWidget->setFixedSize(850, 900);
+		gameFieldWidget->move(1920 / 2 - width() / 2, 1080 / 2 - height() / 2);
+	}
+	else
+	{
+		throw std::exception("Can't close window");
+	}
+}
+
+void MainMenu::onClickedChangeAccountButton()
+{
+	LoginWidget* loginWidget = new LoginWidget(this);
+	if (close())
+	{
+		loginWidget->show();
+	}
+	else
+	{
+		throw std::exception("Can't close window");
+	}
+}
+
+void MainMenu::onClickedExitButton()
+{
+	ConfirmationExitWidget* exitWidget = new ConfirmationExitWidget(this);
+	exitWidget->show();
+	exitWidget->resize(350, 250);
+}
+
+void MainMenu::pressedOnLadderButton()
+{
+	IconSetter::setButtonIcon("img/img/exitButtonIconPressed.jpg", 27, 27, exitButton);
+}
+
+void MainMenu::releasedOnLadderButton()
+{
+	IconSetter::setButtonIcon("img/img/exitButtonIcon.jpg", 36, 36, exitButton);
+}
+
+void MainMenu::restartGame()
+{
+	MainMenu* newMenu = new MainMenu(user, this);
+	if (close())
+	{
+		newMenu->show();
+		newMenu->resize(750, 900);
+	}
+	else
+	{
+		throw std::exception("Can't close window");
+	}
+}
+
+void MainMenu::createObjects()
 {
 	titleLabel = new QLabel("Matrix Memory", this);
 	playButton = new QPushButton("PLAY", this);
@@ -11,114 +84,65 @@ MainMenu::MainMenu(const User &user, QWidget* parent = nullptr):user_(user)
 	recordLabel = new QLabel(this);
 	maxTileLabel = new QLabel(this);
 	exitButton = new QPushButton(this);
-	exitWidget = new ConfirmationExitWidget(this);
-	exitWidget->hide();
+	playerMenu = new QMenu(this);
+	playerToolButton = new QToolButton(this);
+	changeAccountAction = new QAction("Change account", this);
+}
 
-	QMenu* menu = new QMenu("123", this);
-	
-	QToolButton* tb = new QToolButton(this);
-	tb->setMenu(menu);
-	tb->setText(QString::fromStdString((user.getLogin())));
-	tb->setPopupMode(QToolButton::InstantPopup);
-
-	QAction* changeAccountAction = new QAction("Change account", this);
-	menu->addAction(changeAccountAction);
-	
+void MainMenu::setObjectNames()
+{
 	titleLabel->setObjectName("titleLabel");
 	playButton->setObjectName("playButton");
+	scoreLabel->setObjectName("scoreLabel");
+	tileLabel->setObjectName("tileLabel");
 	recordLabel->setObjectName("recordLabel");
 	maxTileLabel->setObjectName("maxTileLabel");
-	exitButton->setObjectName("ladderButton");
+	exitButton->setObjectName("exitButton");
+	playerMenu->setObjectName("playerMenu");
+	playerToolButton->setObjectName("playerToolButton");
+	changeAccountAction->setObjectName("changeAccountAction");
+}
 
-	QPixmap pixmap("img/exitButtonIcon.jpg");
-	QIcon buttonIcon(pixmap);
-	exitButton->setIcon(buttonIcon);
-	exitButton->setIconSize(QSize(36, 36));
-
+void MainMenu::createMainlayout(QHBoxLayout* layout)
+{
 	QVBoxLayout* verticalLayout = new QVBoxLayout(this);
-	QHBoxLayout* horizontaLayout = new QHBoxLayout(this);
+	createSubLayout(verticalLayout);
+	layout->addLayout(verticalLayout);
 
-	verticalLayout->setSpacing(10);
-	verticalLayout->addWidget(titleLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
-	verticalLayout->addSpacing(50);
-	verticalLayout->addWidget(playButton, 0, Qt::AlignTop | Qt::AlignHCenter);
-	verticalLayout->addSpacing(75);
-	verticalLayout->addSpacing(-20);
-	verticalLayout->addWidget(scoreLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
-	verticalLayout->addSpacing(-10);
-	verticalLayout->addWidget(tileLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
-	verticalLayout->addSpacing(-10);
-	verticalLayout->addWidget(recordLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
-	verticalLayout->addSpacing(-10);
-	verticalLayout->addWidget(maxTileLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
-	verticalLayout->addSpacing(195);
-	verticalLayout->addWidget(tb, 0, Qt::AlignLeft | Qt::AlignBottom);
-	verticalLayout->addSpacing(-68);
-	verticalLayout->addWidget(exitButton, 0, Qt::AlignRight | Qt::AlignBottom);
-	horizontaLayout->addLayout(verticalLayout);
+	playerToolButton->setMenu(playerMenu);
+	playerToolButton->setText(QString::fromStdString((user.getLogin())));
+	playerToolButton->setPopupMode(QToolButton::InstantPopup);
+
+	playerMenu->addAction(changeAccountAction);
 
 	connect(playButton, SIGNAL(clicked()), SLOT(onClickedPlayButton()));
 	connect(changeAccountAction, SIGNAL(triggered()), SLOT(onClickedChangeAccountButton()));
-
 	connect(exitButton, SIGNAL(pressed()), SLOT(pressedOnLadderButton()));
 	connect(exitButton, SIGNAL(released()), SLOT(releasedOnLadderButton()));
 	connect(exitButton, SIGNAL(clicked()), SLOT(onClickedExitButton()));
-	connect(exitWidget, &ConfirmationExitWidget::closeMainMenu, this, &MainMenu::close);
 
+	IconSetter::setButtonIcon("img/img/exitButtonIcon.jpg", 36, 36, exitButton);
 	FontSetter::setFont("fonts/fonts/Boomboom.otf", this);
 	StyleSetter::setStyle("styles/styles/mainMenuStyle.qss", this);
 }
 
-void MainMenu::paintEvent(QPaintEvent* event)
+void MainMenu::createSubLayout(QVBoxLayout* layout)
 {
-	scoreLabel->setText("Score: " + QString::number(user_.getScore()));
-	tileLabel->setText("Tiles: " + QString::number(user_.getTiles()));
-	recordLabel->setText("Record: " + QString::number(user_.getRecord()));
-	maxTileLabel->setText("Max Tiles: " + QString::number(user_.getMaxTile()));
-
-}
-void MainMenu::onClickedPlayButton()
-{
-	GameField* gameFieldWidget = new GameField(this, &user_);
-	close();
-	gameFieldWidget->show();
-	gameFieldWidget->setFixedSize(850, 900);
-	gameFieldWidget->move(1920 / 2 - width() / 2, 1080 / 2 - height() / 2);
-}
-
-void MainMenu::onClickedChangeAccountButton()
-{
-	LoginWidget* loginWidget = new LoginWidget(this);
-	close();
-	loginWidget->show();
-}
-
-void MainMenu::onClickedExitButton()
-{
-	exitWidget->show();
-	exitWidget->resize(350, 250);
-}
-
-void MainMenu::pressedOnLadderButton()
-{
-	QPixmap pixmap("img/exitButtonIconPressed.jpg");
-	QIcon buttonIcon(pixmap);
-	exitButton->setIcon(buttonIcon);
-	exitButton->setIconSize(QSize(27, 27));
-}
-
-void MainMenu::releasedOnLadderButton()
-{
-	QPixmap pixmap("img/exitButtonIcon.jpg");
-	QIcon buttonIcon(pixmap);
-	exitButton->setIcon(buttonIcon);
-	exitButton->setIconSize(QSize(36, 36));
-}
-
-void MainMenu::restartGame()
-{
-	MainMenu* newMenu = new MainMenu(user_, this);
-	close();
-	newMenu->show();
-	newMenu->resize(750, 900);
+	layout->setSpacing(10);
+	layout->addWidget(titleLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
+	layout->addSpacing(50);
+	layout->addWidget(playButton, 0, Qt::AlignTop | Qt::AlignHCenter);
+	layout->addSpacing(75);
+	layout->addSpacing(-20);
+	layout->addWidget(scoreLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
+	layout->addSpacing(-10);
+	layout->addWidget(tileLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
+	layout->addSpacing(-10);
+	layout->addWidget(recordLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
+	layout->addSpacing(-10);
+	layout->addWidget(maxTileLabel, 0, Qt::AlignTop | Qt::AlignHCenter);
+	layout->addSpacing(195);
+	layout->addWidget(playerToolButton, 0, Qt::AlignLeft | Qt::AlignBottom);
+	layout->addSpacing(-68);
+	layout->addWidget(exitButton, 0, Qt::AlignRight | Qt::AlignBottom);
 }

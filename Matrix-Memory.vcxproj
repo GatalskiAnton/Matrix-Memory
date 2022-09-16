@@ -86,32 +86,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="fonts\fontSetter.cpp" />
+    <ClCompile Include="img\iconSetter.cpp" />
     <ClCompile Include="source\login\createAccountWidget.cpp" />
     <ClCompile Include="source\game\myButton.cpp" />
     <ClCompile Include="source\user\user.cpp" />
     <ClCompile Include="styles\styleSetter.cpp" />
-    <QtRcc Include="source\stash\MatrixMemory.qrc" />
-    <QtUic Include="source\stash\MatrixMemory.ui" />
-    <QtMoc Include="source\stash\MatrixMemory.h" />
     <ClCompile Include="source\menu\confirmationExitWidget.cpp" />
     <ClCompile Include="source\game\gameField.cpp" />
     <ClCompile Include="source\login\loginWidget.cpp" />
     <ClCompile Include="source\menu\mainMenu.cpp" />
-    <ClCompile Include="source\stash\MatrixMemory.cpp" />
     <ClCompile Include="source\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="source\menu\mainMenu.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="img\exitButtonIcon.jpg" />
-    <Image Include="img\exitButtonIconPressed.jpg" />
+    <Image Include="img\img\exitButtonIcon.jpg" />
+    <Image Include="img\img\exitButtonIconPressed.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="cpp.hint" />
-    <None Include="source\stash\Matrix-Memory.pri" />
-    <None Include="source\stash\Matrix-Memory.pro" />
     <None Include="styles\styles\createAccountWidgetStyle.qss" />
     <None Include="styles\styles\exitWidgetStyle.qss" />
     <None Include="styles\styles\gameFieldStyle.qss" />
@@ -128,6 +123,7 @@
     <QtMoc Include="source\login\loginWidget.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="img\iconSetter.h" />
     <ClInclude Include="styles\styleSetter.h" />
     <QtMoc Include="source\game\myButton.h" />
     <QtMoc Include="source\game\gameField.h" />

@@ -20,9 +20,6 @@ GameField::GameField(QWidget* parent,
 
 	QVBoxLayout* mainLayout = new QVBoxLayout(this);
 	createMainLayout(mainLayout);
-
-	FontSetter::setFont("fonts/fonts/Boomboom.otf", this);
-	StyleSetter::setStyle("styles/styles/gameFieldStyle.qss", this);
 }
 
 void GameField::onClickedBackButton()
@@ -96,6 +93,10 @@ void GameField::createMainLayout(QVBoxLayout* layout)
 	layout->addLayout(tilesLayout, 0);
 
 	connect(backButton, SIGNAL(clicked()), SLOT(onClickedBackButton()));
+
+
+	FontSetter::setFont("fonts/fonts/Boomboom.otf", this);
+	StyleSetter::setStyle("styles/styles/gameFieldStyle.qss", this);
 }
 
 void GameField::createTopMenuLayout(QHBoxLayout* layout)
